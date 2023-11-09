@@ -1,0 +1,61 @@
+//		B   	      	 	 D
+//	     \    \            / |
+//        \       	\	  /  |
+//         \       		C    |
+//          \          	     |
+//           \      F        |
+//            \    /   \     |
+//             \  /        \ |
+//               A            E
+
+//Shape drawing needs work but points are there
+
+
+{
+    "Figure" :
+    {
+      "Description" : "irregular hexagon with lines connecting verticies",
+      "Points" :
+        [
+          {
+            "name" : "A",
+            "x" : 0,
+            "y" : 0
+          },
+          {
+            "name" : "B",
+            "x" : -2,
+            "y" : 3
+          },
+          {
+            "name" : "C",
+            "x" : 2,
+            "y" : 2
+          },
+          {
+            "name" : "D",
+            "x" : 5,
+            "y" : 4
+          },
+          {
+            "name" : "E",
+            "x" : 5,
+            "y" : 0
+          },
+          {
+            "name" : "F",
+            "x" : 3,
+            "y" : 1
+          }
+        ],
+    
+      "Segments" :
+        [
+          {"A" : ["B", "C", "F"] },
+          {"B" : ["C", "F"]},
+          {"C" : ["D", "E", "F"] },
+          {"D" : ["E", "F"] },
+          {"E" : ["F"]}
+        ]
+    }
+  }
