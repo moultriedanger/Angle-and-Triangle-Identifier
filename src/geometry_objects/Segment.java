@@ -7,6 +7,7 @@ import java.util.TreeSet;
 import geometry_objects.delegates.LineDelegate;
 import geometry_objects.delegates.SegmentDelegate;
 import geometry_objects.delegates.intersections.IntersectionDelegate;
+import geometry_objects.delegates.intersections.SegmentIntersectionDelegate;
 import geometry_objects.points.Point;
 import utilities.math.MathUtilities;
 import utilities.math.analytic_geometry.GeometryUtilities;
@@ -69,9 +70,9 @@ public class Segment extends GeometricObject
 	 * @param candidate
 	 * @return true if this segment contains candidate as subsegment.
 	 */
-	public boolean HasSubSegment(Segment candidate)
+	public boolean HasSubSegment(Segment candidate) //is this right
 	{
-        return false;
+		return (this.pointLiesOnSegment(candidate._point1) && (this.pointLiesOnSegment(candidate._point2)));
 	}
 
 	/**
@@ -160,7 +161,8 @@ public class Segment extends GeometricObject
 	 */
 	public boolean coincideWithoutOverlap(Segment that)
 	{
-        // TODO
+        if(this.pointLiesBetweenEndpoints(_point1) || this.pointLiesBetweenEndpoints(_point2)) return false;
+        return SegmentIntersectionDelegate.findIntersection(this, that) == null;
 	}
 	
 	/**
@@ -184,8 +186,11 @@ public class Segment extends GeometricObject
 	{
 		SortedSet<Point> pointsOn = new TreeSet<Point>();
 
-        // TODO
-
+		for (Point p: points) {
+			if (this.pointLiesOn(p)) {
+				pointsOn.add(p);
+			}
+		}
 		return pointsOn;
 	}
 }
