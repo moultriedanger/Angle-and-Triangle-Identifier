@@ -1,4 +1,4 @@
-
+package geometry_objects.delegates.intersections;
 import geometry_objects.delegates.FigureDelegate;
 import geometry_objects.delegates.intersections.LineIntersectionDelegate;
 import geometry_objects.points.Point;
