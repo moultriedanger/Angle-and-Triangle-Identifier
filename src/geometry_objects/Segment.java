@@ -70,7 +70,7 @@ public class Segment extends GeometricObject
 	 * @param candidate
 	 * @return true if this segment contains candidate as subsegment.
 	 */
-	public boolean HasSubSegment(Segment candidate) //is this right
+	public boolean HasSubSegment(Segment candidate)
 	{
 		return (this.pointLiesOnSegment(candidate._point1) && (this.pointLiesOnSegment(candidate._point2)));
 	}
@@ -161,10 +161,22 @@ public class Segment extends GeometricObject
 	 */
 	public boolean coincideWithoutOverlap(Segment that)
 	{
-        if(this.pointLiesBetweenEndpoints(_point1) || this.pointLiesBetweenEndpoints(_point2)) return false;
-        return SegmentIntersectionDelegate.findIntersection(this, that) == null;
-	}
-	
+		if (this._slope != that._slope){
+			
+			if(!(this.pointLiesBetweenEndpoints(that._point1)) || !(this.pointLiesBetweenEndpoints(that._point2))) {
+				return true;
+			}
+			return false;		
+		}
+		else {
+			if(!(this.pointLiesBetweenEndpoints(that._point1)) || !(this.pointLiesBetweenEndpoints(that._point2))) {
+				if (!(this.HasSubSegment(that))){	
+					return true;
+				}
+			}
+			return false;
+			}
+		}
 	/**
 	 *   Example:
 	 *                             Q *
@@ -193,4 +205,5 @@ public class Segment extends GeometricObject
 		}
 		return pointsOn;
 	}
+	
 }

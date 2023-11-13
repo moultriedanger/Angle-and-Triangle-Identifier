@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import geometry_objects.Segment;
+import geometry_objects.delegates.intersections.SegmentIntersectionDelegate;
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
 
@@ -22,18 +23,20 @@ public class ImplicitPointPreprocessor
 	{
 		Set<Point> implicitPoints = new LinkedHashSet<Point>();
 
-        // TODO
 		//Loop through the segments, see if they intersect each other
 		List<Segment> intersectionSeg = givenSegments;
+		
 		for (Segment s : givenSegments) {
+			//Remove it so no duplicate points are made
 			intersectionSeg.remove(s);
 			for (Segment s2 : intersectionSeg) {
 				//See if they intersect
-				if (intersect method call here) implicitPoints.add(intersection method call);
+				Point p = SegmentIntersectionDelegate.findIntersection(s, s2);
+				if (p != null && givenPoints.getPoint(p) == null) implicitPoints.add(p);
 			}
 		}
-
 		return implicitPoints;
+
 	}
 
 }
