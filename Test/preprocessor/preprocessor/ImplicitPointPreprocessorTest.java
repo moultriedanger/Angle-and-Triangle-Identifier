@@ -27,6 +27,12 @@ class ImplicitPointPreprocessorTest {
 	void testCompute() {
 		 PointDatabase pd = new PointDatabase();
 		 
+		 pd.put("D", 0, 0);
+		 pd.put("E", 6, 0);
+		 pd.put("B", 2, 4);
+		 pd.put("C", 4, 4);
+		 pd.put("A", 3, 6);
+		 
 		 Point D = new Point("D", 0,0);
 		 Point E = new Point("E", 6,0);
 		 Point B = new Point("B", 2,4);
@@ -34,7 +40,7 @@ class ImplicitPointPreprocessorTest {
 		 Point A = new Point("A", 3,6);
 		 
 		 
-		 List<Segment> givenSegments = null;
+		 List<Segment> givenSegments = new ArrayList<Segment>();
 		 
 		 Segment AB = new Segment(A,B);
 		 Segment AC = new Segment(A,C);
@@ -57,6 +63,11 @@ class ImplicitPointPreprocessorTest {
 		 givenSegments.add(CD);
 		 givenSegments.add(CE);
 		 givenSegments.add(DE);
+		 
+		 Set<Point> implicitPoints = ImplicitPointPreprocessor.compute(pd, givenSegments);
+		 
+		 System.out.println(implicitPoints.toString());
+		 
 	}
 
 }

@@ -27,8 +27,9 @@ public class ImplicitPointPreprocessor
 		List<Segment> intersectionSeg = givenSegments;
 		
 		for (Segment s : givenSegments) {
+			//System.out.println(s.getPoint1().getName()+s.getPoint2().getName());
 			//Remove it so no duplicate points are made
-			intersectionSeg.remove(s);
+			
 			for (Segment s2 : intersectionSeg) {
 				//See if they intersect
 				Point p = SegmentIntersectionDelegate.findIntersection(s, s2);
@@ -36,7 +37,6 @@ public class ImplicitPointPreprocessor
 			}
 		}
 		return implicitPoints;
-
 	}
 
 }
