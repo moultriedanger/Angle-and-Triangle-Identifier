@@ -35,7 +35,7 @@ public class PointDatabase
 
 	public PointDatabase(List<Point> points)
 	{
-		_factory=new PointNamingFactory(points);
+		_factory = new PointNamingFactory(points);
 	}
 
 	public int size() { return _factory.size(); }

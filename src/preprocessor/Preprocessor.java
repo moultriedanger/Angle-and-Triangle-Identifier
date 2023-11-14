@@ -90,9 +90,19 @@ public class Preprocessor
 
 	public Set<Segment> computeImplicitBaseSegments(Set<Point> _implicitPoints){
 		
+		Set<Segment> impliedSeg = null;
 		
-		
-		return _implicitSegments;
+		for (Point p: _implicitPoints) {
+			
+			for (Segment segment: _givenSegments) {
+				if(segment.pointLiesOn(p)) {
+					
+					impliedSeg.add(new Segment(p, segment.getPoint1()));	
+					impliedSeg.add(new Segment(p, segment.getPoint2()));
+				}
+			}
+		}
+		return impliedSeg;
 	}
 	
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> _implicitPoints, Set<Segment> _givenSegments, Set<Segment> _implicitSegments){
