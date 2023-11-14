@@ -161,22 +161,10 @@ public class Segment extends GeometricObject
 	 */
 	public boolean coincideWithoutOverlap(Segment that)
 	{
-		if (this._slope != that._slope){
-			
-			if(!(this.pointLiesBetweenEndpoints(that._point1)) || !(this.pointLiesBetweenEndpoints(that._point2))) {
-				return true;
-			}
-			return false;		
-		}
-		else {
-			if(!(this.pointLiesBetweenEndpoints(that._point1)) || !(this.pointLiesBetweenEndpoints(that._point2))) {
-				if (!(this.HasSubSegment(that))){	
-					return true;
-				}
-			}
-			return false;
-			}
-		}
+		if (!(this.isCollinearWith(that)))return false;
+		if (this.pointLiesBetweenEndpoints(that._point1) || this.pointLiesBetweenEndpoints(that._point2)) return false;
+		return !(this.HasSubSegment(that) || that.HasSubSegment(this));	
+	}
 	/**
 	 *   Example:
 	 *                             Q *

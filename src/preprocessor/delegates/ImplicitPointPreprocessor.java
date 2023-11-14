@@ -22,18 +22,15 @@ public class ImplicitPointPreprocessor
 	public static Set<Point> compute(PointDatabase givenPoints, List<Segment> givenSegments)
 	{
 		Set<Point> implicitPoints = new LinkedHashSet<Point>();
-
-		//Loop through the segments, see if they intersect each other
-		List<Segment> intersectionSeg = givenSegments;
-		
 		for (Segment s : givenSegments) {
 			//System.out.println(s.getPoint1().getName()+s.getPoint2().getName());
-			//Remove it so no duplicate points are made
-			
-			for (Segment s2 : intersectionSeg) {
-				//See if they intersect
+			for (Segment s2 : givenSegments) {
 				Point p = SegmentIntersectionDelegate.findIntersection(s, s2);
-				if (p != null && givenPoints.getPoint(p) == null) implicitPoints.add(p);
+				if (p != null && givenPoints.getPoint(p) == null) {
+					implicitPoints.add(p);
+					givenPoints.put(null, p.getX(), p.getY());
+				}
+					
 			}
 		}
 		return implicitPoints;

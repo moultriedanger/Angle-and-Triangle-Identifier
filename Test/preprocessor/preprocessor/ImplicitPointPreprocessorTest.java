@@ -66,7 +66,9 @@ class ImplicitPointPreprocessorTest {
 		 
 		 Set<Point> implicitPoints = ImplicitPointPreprocessor.compute(pd, givenSegments);
 		 
-		 System.out.println(implicitPoints.toString());
+		 for(Point p : implicitPoints) {
+			 System.out.println(p.getX() + ", "  + p.getY());
+		 }
 		 
 	}
 
