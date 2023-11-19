@@ -1,4 +1,4 @@
-package preprocessor;
+package preprocessor.preprocessor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,6 +15,7 @@ import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
 import input.InputFacade;
 import input.components.FigureNode;
+import preprocessor.Preprocessor;
 import preprocessor.delegates.ImplicitPointPreprocessor;
 
 class PreprocessorTest

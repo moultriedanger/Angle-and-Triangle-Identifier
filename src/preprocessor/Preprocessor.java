@@ -106,6 +106,9 @@ public class Preprocessor
 	}
 	
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> _implicitPoints, Set<Segment> _givenSegments, Set<Segment> _implicitSegments){
+		//If it contains a midpoint, its not a minimal segment.
+		//Do something:
+		
 		
 		
 		return _implicitSegments;

@@ -18,7 +18,6 @@ import input.InputFacade;
 import input.components.FigureNode;
 import preprocessor.delegates.ImplicitPointPreprocessor;
 
-
 import org.junit.jupiter.api.Test;
 
 class ImplicitPointPreprocessorTest {
