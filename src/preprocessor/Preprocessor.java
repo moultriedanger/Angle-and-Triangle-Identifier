@@ -65,8 +65,8 @@ public class Preprocessor
 		_implicitPoints = ImplicitPointPreprocessor.compute(_pointDatabase, _givenSegments.stream().toList());
 
 		//
-		// Implicit Segments attributed to implicit points
-		//
+		//Implicit Segments attributed to implicit points
+		
 		_implicitSegments = computeImplicitBaseSegments(_implicitPoints);
 
 		//
@@ -91,27 +91,31 @@ public class Preprocessor
 	public Set<Segment> computeImplicitBaseSegments(Set<Point> _implicitPoints){
 		
 		Set<Segment> impliedSeg = null;
-		
-		for (Point p: _implicitPoints) {
-			
-			for (Segment segment: _givenSegments) {
-				if(segment.pointLiesOn(p)) {
-					
-					impliedSeg.add(new Segment(p, segment.getPoint1()));	
-					impliedSeg.add(new Segment(p, segment.getPoint2()));
-				}
-			}
-		}
+//		
+//		for (Point p: _implicitPoints) {
+//			
+//			for (Segment segment: _givenSegments) {
+//				if(segment.pointLiesOn(p)) {
+//					
+//					impliedSeg.add(new Segment(p, segment.getPoint1()));	
+//					impliedSeg.add(new Segment(p, segment.getPoint2()));
+//				}
+//			}
+//		}
 		return impliedSeg;
 	}
 	
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> _implicitPoints, Set<Segment> _givenSegments, Set<Segment> _implicitSegments){
+		
+		Set<Segment> _minimalSegments = null;
+		
 		//If it contains a midpoint, its not a minimal segment.
 		//Do something:
 		
+		//c
 		
 		
-		return _implicitSegments;
+		return _minimalSegments;
 	}
 	
 	private Set<Segment> constructAllNonMinimalSegments(Set<Segment> _allMinimalSegments) {
