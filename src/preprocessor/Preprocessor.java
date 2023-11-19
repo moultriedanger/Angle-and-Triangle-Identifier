@@ -90,18 +90,18 @@ public class Preprocessor
 
 	public Set<Segment> computeImplicitBaseSegments(Set<Point> _implicitPoints){
 		
-		Set<Segment> impliedSeg = null;
-//		
-//		for (Point p: _implicitPoints) {
-//			
-//			for (Segment segment: _givenSegments) {
-//				if(segment.pointLiesOn(p)) {
-//					
-//					impliedSeg.add(new Segment(p, segment.getPoint1()));	
-//					impliedSeg.add(new Segment(p, segment.getPoint2()));
-//				}
-//			}
-//		}
+		Set<Segment> impliedSeg = new HashSet<Segment>();
+		
+		for (Point p: _implicitPoints) {
+			
+			for (Segment segment: _givenSegments) {
+				if(segment.pointLiesOn(p)) {
+					
+					impliedSeg.add(new Segment(p, segment.getPoint1()));	
+					impliedSeg.add(new Segment(p, segment.getPoint2()));
+				}
+			}
+		}
 		return impliedSeg;
 	}
 	

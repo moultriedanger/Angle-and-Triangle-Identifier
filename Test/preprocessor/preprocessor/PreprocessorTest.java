@@ -62,12 +62,12 @@ class PreprocessorTest
 		Point d_star = new Point(90.0 / 59, 210.0 / 59);
 		Point e_star = new Point(194.0 / 55, 182.0 / 55);
 //
-		assertTrue(iPoints.contains(a_star));    //Yes
-		//assertTrue(iPoints.contains(b_star));    //No
-		//assertTrue(iPoints.contains(c_star));    //No
-		assertTrue(iPoints.contains(d_star));    //Yes
-		assertTrue(iPoints.contains(e_star));    //Yes
-//
+		assertTrue(iPoints.contains(a_star));     //Yes
+		//assertTrue(iPoints.contains(b_star));   //No
+		//assertTrue(iPoints.contains(c_star));   //No
+		assertTrue(iPoints.contains(d_star));     //Yes
+		assertTrue(iPoints.contains(e_star));     //Yes
+
 //		//
 //		// There are 15 implied segments inside the pentagon; see figure above
 //		//
