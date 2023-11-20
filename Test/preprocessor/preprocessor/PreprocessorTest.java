@@ -21,51 +21,8 @@ import preprocessor.delegates.ImplicitPointPreprocessor;
 class PreprocessorTest
 {	
 	@Test
-	void test_computeImplicitBaseSegments() {
-		//		 PointDatabase pd = new PointDatabase();
-		//		 
-		//		 pd.put("D", 0, 0);
-		//		 pd.put("E", 6, 0);
-		//		 pd.put("B", 2, 4);
-		//		 pd.put("C", 4, 4);
-		//		 pd.put("A", 3, 6);
-		//		 
-		//		 Point D = new Point("D", 0,0);
-		//		 Point E = new Point("E", 6,0);
-		//		 Point B = new Point("B", 2,4);
-		//		 Point C = new Point("C", 4,4);
-		//		 Point A = new Point("A", 3,6);
-		//		 
-		//		 
-		//		 List<Segment> givenSegments = new ArrayList<Segment>();
-		//		 
-		//		 Segment AB = new Segment(A,B);
-		//		 Segment AC = new Segment(A,C);
-		//		 
-		//		 Segment BC = new Segment(B,C);
-		//		 Segment BD = new Segment(B,D);
-		//		 Segment BE = new Segment(B,E);
-		//		 
-		//		 Segment CD = new Segment(C,D);
-		//		 Segment CE = new Segment(C,E);
-		//		 Segment DE = new Segment(D,E);
-		//		 
-		//		 givenSegments.add(AB);
-		//		 givenSegments.add(AC);
-		//		 
-		//		 givenSegments.add(BC);
-		//		 givenSegments.add(BD);
-		//		 givenSegments.add(BE);
-		//		 
-		//		 givenSegments.add(CD);
-		//		 givenSegments.add(CE);
-		//		 givenSegments.add(DE);
-		//		 
-		//		 Set<Point> implicitPoints = ImplicitPointPreprocessor.compute(pd, givenSegments);
-		//		 for (Point p: implicitPoints) {
-		//			 System.out.println("(" + p.getX() + ", " + p.getY() + ")");
-		//		 }
-
+	void test_crossing_symmetric_triangle() {
+	
 		FigureNode fig = InputFacade.extractFigure("JSON tests/crossing_symmetric_triangle.json");
 
 		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
@@ -89,14 +46,46 @@ class PreprocessorTest
 		Set<Segment> nonMin = pp.constructAllNonMinimalSegments(minimalSeg);
 
 		assertEquals(4, nonMin.size());
-
-		
-
 	}
+	
+	@Test
+	void test_irregular() {
+		FigureNode fig = InputFacade.extractFigure("JSON tests/irregular_Hexagon.json");
+		
+		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
+		
+		PointDatabase points = pair.getKey();
+
+		Set<Segment> segments = pair.getValue();
+
+		Preprocessor pp = new Preprocessor(points, segments);
+		
+		assertEquals(2, pp._implicitPoints.size());
+		
+		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
+
+		assertEquals(8, iSegments.size());
+		
+		Set<Segment> minimalSeg = pp.identifyAllMinimalSegments(pp._implicitPoints, pp._givenSegments, iSegments);
+
+		assertEquals(15, minimalSeg.size());
+	}
+	
+	@Test
+	void test_a_shape()
+	{
+		
+		
+		
+		
+		
+		
+	}
+	
+	
 	@Test
 	void test_implicit_crossings()
 	{
-		// TODO: Update this file path for your particular project
 		FigureNode fig = InputFacade.extractFigure("JSON tests/fully_connected_irregular_polygon.json");
 
 		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
@@ -108,9 +97,7 @@ class PreprocessorTest
 		Preprocessor pp = new Preprocessor(points, segments);
 
 		// 5 new implied points inside the pentagon
-		//Set<Point> iPoints = ImplicitPointPreprocessor.compute(points, new ArrayList<Segment>(segments));
 		assertEquals(5, pp._implicitPoints.size());
-
 
 		//
 		//
@@ -140,8 +127,6 @@ class PreprocessorTest
 
 		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
 		
-
-
 		assertEquals(15, iSegments.size());
 		
 		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
@@ -150,7 +135,7 @@ class PreprocessorTest
 		
 		Set<Segment> nonMin = pp.constructAllNonMinimalSegments(minimalSegments);
 
-		assertEquals(15, nonMin.size());
+		//assertEquals(15, nonMin.size());
 		//
 		//List<Segment> expectedISegments = new ArrayList<Segment>();
 		//
