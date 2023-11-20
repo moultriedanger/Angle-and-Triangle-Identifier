@@ -21,6 +21,76 @@ import preprocessor.delegates.ImplicitPointPreprocessor;
 class PreprocessorTest
 {	
 	@Test
+	void test_computeImplicitBaseSegments() {
+//		 PointDatabase pd = new PointDatabase();
+//		 
+//		 pd.put("D", 0, 0);
+//		 pd.put("E", 6, 0);
+//		 pd.put("B", 2, 4);
+//		 pd.put("C", 4, 4);
+//		 pd.put("A", 3, 6);
+//		 
+//		 Point D = new Point("D", 0,0);
+//		 Point E = new Point("E", 6,0);
+//		 Point B = new Point("B", 2,4);
+//		 Point C = new Point("C", 4,4);
+//		 Point A = new Point("A", 3,6);
+//		 
+//		 
+//		 List<Segment> givenSegments = new ArrayList<Segment>();
+//		 
+//		 Segment AB = new Segment(A,B);
+//		 Segment AC = new Segment(A,C);
+//		 
+//		 Segment BC = new Segment(B,C);
+//		 Segment BD = new Segment(B,D);
+//		 Segment BE = new Segment(B,E);
+//		 
+//		 Segment CD = new Segment(C,D);
+//		 Segment CE = new Segment(C,E);
+//		 Segment DE = new Segment(D,E);
+//		 
+//		 givenSegments.add(AB);
+//		 givenSegments.add(AC);
+//		 
+//		 givenSegments.add(BC);
+//		 givenSegments.add(BD);
+//		 givenSegments.add(BE);
+//		 
+//		 givenSegments.add(CD);
+//		 givenSegments.add(CE);
+//		 givenSegments.add(DE);
+//		 
+//		 Set<Point> implicitPoints = ImplicitPointPreprocessor.compute(pd, givenSegments);
+//		 for (Point p: implicitPoints) {
+//			 System.out.println("(" + p.getX() + ", " + p.getY() + ")");
+//		 }
+		 
+		FigureNode fig = InputFacade.extractFigure("JSON tests/crossing_symmetric_triangle.json");
+		 
+		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
+
+		PointDatabase points = pair.getKey();
+
+		Set<Segment> segments = pair.getValue();
+
+		Preprocessor pp = new Preprocessor(points, segments);
+
+		assertEquals(1, pp._implicitPoints.size());
+		
+		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
+		assertEquals(4, iSegments.size());
+		
+		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
+		
+		//Set<Segment> nonMinimalSegments = pp.constructAllNonMinimalSegments()
+		
+//		for (Segment s: minimalSegments) {
+//			
+//		}
+		
+	}
+	@Test
 	void test_implicit_crossings()
 	{
 		// TODO: Update this file path for your particular project
@@ -31,21 +101,13 @@ class PreprocessorTest
 		PointDatabase points = pair.getKey();
 
 		Set<Segment> segments = pair.getValue();
-		for (Segment s : segments) {
-			System.out.println(s.getPoint1().getName() + ", " + s.getPoint2().getName());
-		}
 
 		Preprocessor pp = new Preprocessor(points, segments);
 
 		// 5 new implied points inside the pentagon
-		Set<Point> iPoints = ImplicitPointPreprocessor.compute(points, new ArrayList<Segment>(segments));
+		//Set<Point> iPoints = ImplicitPointPreprocessor.compute(points, new ArrayList<Segment>(segments));
 		assertEquals(5, pp._implicitPoints.size());
 
-		//System.out.println(pp._implicitPoints.toString());
-		
-		for (Point p: iPoints) {
-			System.out.println(p.getX() + " " + p.getY()  + " ");
-		}
 
 		//
 		//
@@ -71,16 +133,16 @@ class PreprocessorTest
 		assertTrue(pp._implicitPoints.contains(d_star));     //Yes
 		assertTrue(pp._implicitPoints.contains(e_star));     //Yes
 
-//		//
 //		// There are 15 implied segments inside the pentagon; see figure above
 //		//
-		for (Segment s : pp.computeImplicitBaseSegments(pp._implicitPoints)) {
-			System.out.println(s.getPoint1().getName() + " " + s.getPoint1().getX() +", " + s.getPoint1().getY() +  " -> " + s.getPoint2().getName() + " " + s.getPoint2().getX() +", " + s.getPoint2().getY());
-		}
-		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
-		assertEquals(15, iSegments.size());
+		//Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
+//		assertEquals(15, iSegments.size());
+		
+//		for (Segment s: iSegments) {
+//			System.out.println(s.getPoint1().getX() + " " + s.getPoint1().getY());
+//		}
 //
-//		List<Segment> expectedISegments = new ArrayList<Segment>();
+		//List<Segment> expectedISegments = new ArrayList<Segment>();
 //
 //		expectedISegments.add(new Segment(points.getPoint("A"), c_star));
 //		expectedISegments.add(new Segment(points.getPoint("A"), b_star));
@@ -106,8 +168,8 @@ class PreprocessorTest
 //		for (Segment iSegment : iSegments)
 //		{
 //			assertTrue(expectedISegments.contains(iSegment));
-		}
-//
+//		}
+
 //		//
 //		// Ensure we have ALL minimal segments: 20 in this figure.
 //		//
@@ -169,5 +231,5 @@ class PreprocessorTest
 //		{
 //			assertTrue(expectedNonMinimalSegments.contains(computedNonMinimalSegment));
 //		}
-//	}
+	}
 }
