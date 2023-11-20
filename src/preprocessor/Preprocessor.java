@@ -42,9 +42,9 @@ public class Preprocessor
 	{
 		_pointDatabase  = points;
 		_givenSegments = segments;
-		
+
 		_segmentDatabase = new HashMap<Segment, Segment>();
-		
+
 		analyze();
 	}
 
@@ -60,7 +60,7 @@ public class Preprocessor
 
 		//
 		//Implicit Segments attributed to implicit points
-		
+
 		_implicitSegments = computeImplicitBaseSegments(_implicitPoints);
 
 		//
@@ -83,26 +83,33 @@ public class Preprocessor
 	}
 
 	public Set<Segment> computeImplicitBaseSegments(Set<Point> _implicitPoints){
-		
+
 		Set<Segment> impliedSeg = new HashSet<Segment>();
-		
-		for (Point p: _implicitPoints) {
-			for (Segment segment: _givenSegments) {
-				if(segment.pointLiesOn(p)) {
-					impliedSeg.add(new Segment(p, segment.getPoint1()));	
-					impliedSeg.add(new Segment(p, segment.getPoint2()));
+
+		for (Point p : _implicitPoints) {
+			for(Segment s : _givenSegments) {
+				if (new Segment(p, s.getPoint1()).collectOrderedPointsOnSegment(_implicitPoints).size() == 2) {
+					impliedSeg.add(new Segment(p, s.getPoint1()));
+				}
+				if (new Segment(p, s.getPoint2()).collectOrderedPointsOnSegment(_implicitPoints).size() == 2) {
+					impliedSeg.add(new Segment(p, s.getPoint2()));
+				}
+				for(Point p2 : _implicitPoints) {
+					if (s.pointLiesOn(p) && s.pointLiesOn(p2) && new Segment(p, p2).collectOrderedPointsOnSegment(_implicitPoints).size() == 2) {
+						impliedSeg.add(new Segment(p, p2));
+					}
 				}
 			}
+				
 		}
-		
 		return impliedSeg;
 	}
-	
+
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> _implicitPoints, Set<Segment> _givenSegments, Set<Segment> _implicitSegments){
 
 		//Updating given segments/PDB
 		Set<Segment> minimal = new HashSet<Segment>();
-		
+
 		Set<Segment> total = new HashSet<Segment>();
 		total.addAll(_implicitSegments);
 		total.addAll(_givenSegments);
@@ -133,7 +140,7 @@ public class Preprocessor
 	private Set<Segment> constructAllNonMinimalSegments(Set<Segment> _allMinimalSegments) {
 
 		Set<Segment> nonMinimal = new HashSet<Segment>();
-		
+
 		for (Point start : _pointDatabase.getPoints()){
 			for (Point end : _pointDatabase.getPoints()){
 				if (new Segment (start, end).collectOrderedPointsOnSegment(_pointDatabase.getPoints()).size() > 2) {
