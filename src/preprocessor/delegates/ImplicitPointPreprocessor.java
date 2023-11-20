@@ -22,7 +22,7 @@ public class ImplicitPointPreprocessor
 	public static Set<Point> compute(PointDatabase givenPoints, List<Segment> givenSegments)
 	{
 
-		//Name implicit points as they are created
+		//Used to name implicit points as they are created
 		PointNamingFactory pnf = new PointNamingFactory();
 		Set<Point> implicitPoints = new LinkedHashSet<Point>();
 

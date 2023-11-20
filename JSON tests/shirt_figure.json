@@ -1,0 +1,61 @@
+//
+//	  B-------C
+//  / |		  | \
+// G--+---E---+--F			
+//    | /   \ |
+//	  A-------D
+//
+{
+  "Figure" :
+  {
+    "Description" : "A symmetrical set of shapes that resembles a tee with a crossing pattern on the lower half.",
+    "Points" :
+	  [
+	    {
+	      "name" : "A",
+		  "x" : 1,
+   	      "y" : 1
+		},
+	    {
+	      "name" : "B",
+		  "x" : 1,
+   	      "y" : 5
+		},
+	    {
+	      "name" : "C",
+		  "x" : 3,
+   	      "y" : 5
+		},
+        {
+          "name" : "D",
+          "x" : 3,
+          "y" : 1
+        },
+        {
+          "name" : "E",
+          "x" : 2,
+          "y" : 3
+        },
+        {
+          "name" : "F",
+          "x" : 4,
+          "y" : 3
+        },
+        {
+          "name" : "G",
+          "x" : 0,
+          "y" : 3
+        }
+	  ],
+    "Segments" :
+      [
+	    {"A" : ["B", "D"] },
+        {"B" : ["G"] },
+        {"C" : ["B", "F"] },
+        {"D" : ["C"] },
+        {"E" : ["D", "A", "F", "G"] },
+        {"F" : ["G", "C"] },
+        {"G" : ["B"] }
+      ]
+  }
+}

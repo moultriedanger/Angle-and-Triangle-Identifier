@@ -100,8 +100,9 @@ public class Preprocessor
 				}
 				//Crafting the segments between two implicit points
 				for(Point p2 : _implicitPoints) {
-					if (s.pointLiesOn(p) && s.pointLiesOn(p2) && new Segment(p, p2).collectOrderedPointsOnSegment(_implicitPoints).size() == 2) {
-						impliedSeg.add(new Segment(p, p2));
+					Segment s3 = new Segment(p, p2);
+					if (s.pointLiesOn(p) && s.pointLiesOn(p2) && s3.collectOrderedPointsOnSegment(_implicitPoints).size() == 2) {
+						if(s3.collectOrderedPointsOnSegment(_pointDatabase.getPoints()).size() == 0)impliedSeg.add(s3);
 					}
 				}
 			}
@@ -115,18 +116,18 @@ public class Preprocessor
 		//Constructing sets of total points/segments to be used later
 		Set<Segment> totalSegments = new HashSet<Segment>();
 		for (Segment s : _implicitSegments) {
-			if(!totalSegments.contains(s))totalSegments.add(s);
+			totalSegments.add(s);
 		}
 		for (Segment s : _givenSegments) {
-			if(!totalSegments.contains(s))totalSegments.add(s);
+			totalSegments.add(s);
 		}
 
 		Set<Point> totalPoints = new HashSet<Point>();
 		for (Point p : _implicitPoints) {
-			if(!totalPoints.contains(p))totalPoints.add(p);
+			totalPoints.add(p);
 		}
 		for (Point p : _pointDatabase.getPoints()) {
-			if(!totalPoints.contains(p))totalPoints.add(p);
+			totalPoints.add(p);
 		}	
 
 

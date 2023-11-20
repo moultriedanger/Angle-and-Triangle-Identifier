@@ -72,6 +72,7 @@ public class Segment extends GeometricObject
 	 */
 	public boolean HasSubSegment(Segment candidate)
 	{
+		//Checks if the points are on the segment - edges count
 		return (this.pointLiesOnSegment(candidate._point1) && (this.pointLiesOnSegment(candidate._point2)));
 	}
 
@@ -161,6 +162,7 @@ public class Segment extends GeometricObject
 	 */
 	public boolean coincideWithoutOverlap(Segment that)
 	{
+		//Checks if collinear, if they overlap, then if they are sub segments of each other
 		if (!(this.isCollinearWith(that)))return false;
 		if (this.pointLiesBetweenEndpoints(that._point1) || this.pointLiesBetweenEndpoints(that._point2)) return false;
 		return !(this.HasSubSegment(that) || that.HasSubSegment(this));	
@@ -186,6 +188,7 @@ public class Segment extends GeometricObject
 	{
 		SortedSet<Point> pointsOn = new TreeSet<Point>();
 
+		//Add if point from the set is on the segment
 		for (Point p: points) {
 			if (this.pointLiesOn(p)) {
 				pointsOn.add(p);
