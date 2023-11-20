@@ -73,28 +73,24 @@ class PreprocessorTest
 		PointDatabase points = pair.getKey();
 
 		Set<Segment> segments = pair.getValue();
-		
-//		for (Segment s : segments) {
-//			System.out.println(s.getPoint1().getName() + " " + s.getPoint1().getX() +", " + s.getPoint1().getY() +  " -> " + s.getPoint2().getName() + " " + s.getPoint2().getX() +", " + s.getPoint2().getY());
-//		}
 
 		Preprocessor pp = new Preprocessor(points, segments);
 
 		assertEquals(1, pp._implicitPoints.size());
 
 		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
-//		for (Segment s : iSegments) {
-//			System.out.println(s.getPoint1().getName() + " " + s.getPoint1().getX() +", " + s.getPoint1().getY() +  " -> " + s.getPoint2().getName() + " " + s.getPoint2().getX() +", " + s.getPoint2().getY());
-//		}
+
 		assertEquals(4, iSegments.size());
 
-		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
+		Set<Segment> minimalSeg = pp.identifyAllMinimalSegments(pp._implicitPoints, pp._givenSegments, iSegments);
 
-		//Set<Segment> nonMinimalSegments = pp.constructAllNonMinimalSegments()
+		assertEquals(10, minimalSeg.size());
+		
+		Set<Segment> nonMin = pp.constructAllNonMinimalSegments(minimalSeg);
 
-		//		for (Segment s: minimalSegments) {
-		//			
-		//		}
+		assertEquals(4, nonMin.size());
+
+		
 
 	}
 	@Test
@@ -145,10 +141,16 @@ class PreprocessorTest
 		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
 		
 
-		for (Segment s : iSegments) {
-			System.out.println(s.getPoint1().getName() + " " + s.getPoint1().getX() +", " + s.getPoint1().getY() +  " -> " + s.getPoint2().getName() + " " + s.getPoint2().getX() +", " + s.getPoint2().getY());
-		}
+
 		assertEquals(15, iSegments.size());
+		
+		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
+
+		assertEquals(20, minimalSegments.size());
+		
+		Set<Segment> nonMin = pp.constructAllNonMinimalSegments(minimalSegments);
+
+		assertEquals(15, nonMin.size());
 		//
 		//List<Segment> expectedISegments = new ArrayList<Segment>();
 		//

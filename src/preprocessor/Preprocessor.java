@@ -1,5 +1,7 @@
 package preprocessor;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.*;
 import geometry_objects.Segment;
 import geometry_objects.points.Point;
@@ -110,28 +112,31 @@ public class Preprocessor
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> _implicitPoints, Set<Segment> _givenSegments, Set<Segment> _implicitSegments){
 
 		//Updating given segments/PDB
-		Set<Segment> minimal = new HashSet<Segment>();
+		Set<Segment> totalSegments = new HashSet<Segment>();
+		for (Segment s : _implicitSegments) {
+			if(!totalSegments.contains(s))totalSegments.add(s);
+		}
+		for (Segment s : _givenSegments) {
+			if(!totalSegments.contains(s))totalSegments.add(s);
+		}
 
-		Set<Segment> total = new HashSet<Segment>();
-		total.addAll(_implicitSegments);
-		total.addAll(_givenSegments);
-
-		Set<Point> totalP = new HashSet<Point>();
+		Set<Point> totalPoints = new HashSet<Point>();
 		for (Point p : _implicitPoints) {
-			totalP.add(p);
+			if(!totalPoints.contains(p))totalPoints.add(p);
 		}
 		for (Point p : _pointDatabase.getPoints()) {
-			totalP.add(p);
-		}
+			if(!totalPoints.contains(p))totalPoints.add(p);
+		}	
 
 
+		Set<Segment> minimal = new HashSet<Segment>();
 		//Loop through segments, see if they have any other points on them.
-		for(Segment s : total) {
+		for(Segment s : totalSegments) {
 			Point start = s.getPoint1();
-			for(Point end : s.collectOrderedPointsOnSegment(totalP)){
+			for(Point end : s.collectOrderedPointsOnSegment(totalPoints)){
 				//Break them up into minimal segments
 				if (start.equals(end))continue;
-				minimal.add(new Segment(start, end));
+				if (new Segment(start, end).collectOrderedPointsOnSegment(totalPoints).size() == 2) minimal.add(new Segment(start, end));
 				start = end;
 			}
 		}
@@ -139,7 +144,7 @@ public class Preprocessor
 	}
 
 
-	private Set<Segment> constructAllNonMinimalSegments(Set<Segment> _allMinimalSegments) {
+	public Set<Segment> constructAllNonMinimalSegments(Set<Segment> _allMinimalSegments) {
 
 		Set<Segment> nonMinimal = new HashSet<Segment>();
 
