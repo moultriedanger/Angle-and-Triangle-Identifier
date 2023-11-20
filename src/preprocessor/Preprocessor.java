@@ -143,7 +143,6 @@ public class Preprocessor
 		return minimal;
 	}
 
-
 	public Set<Segment> constructAllNonMinimalSegments(Set<Segment> _allMinimalSegments) {
 
 		Set<Segment> nonMinimal = new HashSet<Segment>();
