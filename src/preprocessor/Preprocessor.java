@@ -4,6 +4,7 @@ import java.util.*;
 import geometry_objects.Segment;
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
+import geometry_objects.points.PointNamingFactory;
 import preprocessor.delegates.ImplicitPointPreprocessor;
 
 public class Preprocessor
@@ -11,30 +12,30 @@ public class Preprocessor
 	// The explicit points provided to us by the user.
 	// This database will also be modified to include the implicit
 	// points (i.e., all points in the figure).
-	protected PointDatabase _pointDatabase;
+	public PointDatabase _pointDatabase;
 
 	// Minimal ('Base') segments provided by the user
-	protected Set<Segment> _givenSegments;
+	public Set<Segment> _givenSegments;
 
 	// The set of implicitly defined points caused by segments
 	// at implicit points.
-	protected Set<Point> _implicitPoints;
+	public Set<Point> _implicitPoints;
 
 	// The set of implicitly defined segments resulting from implicit points.
-	protected Set<Segment> _implicitSegments;
+	public Set<Segment> _implicitSegments;
 
 	// Given all explicit and implicit points, we have a set of
 	// segments that contain no other subsegments; these are minimal ('base') segments
 	// That is, minimal segments uniquely define the figure.
-	protected Set<Segment> _allMinimalSegments;
+	public Set<Segment> _allMinimalSegments;
 
 	// A collection of non-basic segments
-	protected Set<Segment> _nonMinimalSegments;
+	public Set<Segment> _nonMinimalSegments;
 
 	// A collection of all possible segments: maximal, minimal, and everything in between
 	// For lookup capability, we use a map; each <key, value> has the same segment object
 	// That is, key == value. 
-	protected Map<Segment, Segment> _segmentDatabase;
+	public Map<Segment, Segment> _segmentDatabase;
 	public Map<Segment, Segment> getAllSegments() { return _segmentDatabase; }
 
 	public Preprocessor(PointDatabase points, Set<Segment> segments)
@@ -86,15 +87,14 @@ public class Preprocessor
 		Set<Segment> impliedSeg = new HashSet<Segment>();
 		
 		for (Point p: _implicitPoints) {
-			
 			for (Segment segment: _givenSegments) {
 				if(segment.pointLiesOn(p)) {
-					
 					impliedSeg.add(new Segment(p, segment.getPoint1()));	
 					impliedSeg.add(new Segment(p, segment.getPoint2()));
 				}
 			}
 		}
+		
 		return impliedSeg;
 	}
 	
@@ -120,7 +120,6 @@ public class Preprocessor
 		for(Segment s : total) {
 			Point start = s.getPoint1();
 			for(Point end : s.collectOrderedPointsOnSegment(totalP)){
-
 				//Break them up into minimal segments
 				if (start.equals(end))continue;
 				minimal.add(new Segment(start, end));

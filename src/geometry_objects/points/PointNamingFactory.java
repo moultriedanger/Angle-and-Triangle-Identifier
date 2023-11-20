@@ -72,7 +72,7 @@ public class PointNamingFactory
 			return pt;
 		}
 		//else a new point is created with a name
-		Point newpt=new Point(getCurrentName(), pt.getX(), pt.getY());
+		Point newpt = new Point(getCurrentName(), pt.getX(), pt.getY());
 		_database.put(newpt, newpt);
 		return newpt;
 	}
@@ -113,7 +113,7 @@ public class PointNamingFactory
 	 */
 	public Point put(String name, double x, double y)
 	{
-		Point pt=new Point(name, x, y);
+		Point pt = new Point(name, x, y);
 		return put(pt);
 	}    
 
@@ -157,7 +157,7 @@ public class PointNamingFactory
 	 */
 	private String getCurrentName()
 	{
-		String name=_currentName;
+		String name = _currentName;
         updateName();
         return name;
         
@@ -170,17 +170,17 @@ public class PointNamingFactory
 	private void updateName()
 	{
 		//Dictates the amount of letters a name needs based on letter value
-        if (_currentLetter==END_LETTER) _numLetters++;
+        if (_currentLetter == END_LETTER) _numLetters++;
         _currentLetter++; 
         //creates a string of _current letters based on the size of numLetters
-        String letters=""+_currentLetter;
-        if (_numLetters>1) {
-        	for (int i=1;i<_numLetters;i++) {
-        		letters=letters+_currentLetter;
+        String letters = "" + _currentLetter;
+        if (_numLetters > 1) {
+        	for (int i = 1 ; i < _numLetters; i++) {
+        		letters = letters + _currentLetter;
         	}
         }
         //updates currentName
-        _currentName=_PREFIX + letters;
+        _currentName = _PREFIX + letters;
 	}
 
 	/**

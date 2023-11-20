@@ -31,14 +31,17 @@ class PreprocessorTest
 		PointDatabase points = pair.getKey();
 
 		Set<Segment> segments = pair.getValue();
+		for (Segment s : segments) {
+			System.out.println(s.getPoint1().getName() + ", " + s.getPoint2().getName());
+		}
 
 		Preprocessor pp = new Preprocessor(points, segments);
 
 		// 5 new implied points inside the pentagon
 		Set<Point> iPoints = ImplicitPointPreprocessor.compute(points, new ArrayList<Segment>(segments));
-		//assertEquals(5, iPoints.size());
+		assertEquals(5, pp._implicitPoints.size());
 
-		//System.out.println(iPoints);
+		//System.out.println(pp._implicitPoints.toString());
 		
 		for (Point p: iPoints) {
 			System.out.println(p.getX() + " " + p.getY()  + " ");
@@ -63,16 +66,19 @@ class PreprocessorTest
 		Point e_star = new Point(194.0 / 55, 182.0 / 55);
 
 		assertTrue(pp._implicitPoints.contains(a_star));     //Yes
-		assertTrue(iPoints.contains(b_star));   //No
-		assertTrue(iPoints.contains(c_star));   //No
-		assertTrue(iPoints.contains(d_star));     //Yes
-		assertTrue(iPoints.contains(e_star));     //Yes
+		assertTrue(pp._implicitPoints.contains(b_star));   //No
+		assertTrue(pp._implicitPoints.contains(c_star));   //No
+		assertTrue(pp._implicitPoints.contains(d_star));     //Yes
+		assertTrue(pp._implicitPoints.contains(e_star));     //Yes
 
 //		//
 //		// There are 15 implied segments inside the pentagon; see figure above
 //		//
-		Set<Segment> iSegments = pp.computeImplicitBaseSegments(iPoints);
-//		assertEquals(15, iSegments.size());
+		for (Segment s : pp.computeImplicitBaseSegments(pp._implicitPoints)) {
+			System.out.println(s.getPoint1().getName() + " " + s.getPoint1().getX() +", " + s.getPoint1().getY() +  " -> " + s.getPoint2().getName() + " " + s.getPoint2().getX() +", " + s.getPoint2().getY());
+		}
+		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
+		assertEquals(15, iSegments.size());
 //
 //		List<Segment> expectedISegments = new ArrayList<Segment>();
 //
