@@ -17,22 +17,26 @@ public class ImplicitPointPreprocessor
 	 * and points that are not named; we need to capture those
 	 * points and name them.
 	 * 
-	 * Algorithm:
-	 *    loop through each, see if intersect
+	 * 
 	 */
 	public static Set<Point> compute(PointDatabase givenPoints, List<Segment> givenSegments)
 	{
+
+		//Name implicit points as they are created
 		PointNamingFactory pnf = new PointNamingFactory();
 		Set<Point> implicitPoints = new LinkedHashSet<Point>();
+
+		//Loop through list of segments twice, see if they intersect each other
 		for (Segment s : givenSegments) {
-			//System.out.println(s.getPoint1().getName()+s.getPoint2().getName());
 			for (Segment s2 : givenSegments) {
 				Point p = SegmentIntersectionDelegate.findIntersection(s, s2);
+
+				//If they do intersect, add it to our implicit points
 				if (p != null && givenPoints.getPoint(p) == null) {
 					implicitPoints.add(pnf.put(p));
 					givenPoints.put(null, p.getX(), p.getY());
 				}
-					
+
 			}
 		}
 		return implicitPoints;

@@ -16,7 +16,6 @@ import geometry_objects.points.PointDatabase;
 import input.InputFacade;
 import input.components.FigureNode;
 import preprocessor.Preprocessor;
-import preprocessor.delegates.ImplicitPointPreprocessor;
 
 class PreprocessorTest
 {	

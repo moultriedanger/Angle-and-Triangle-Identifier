@@ -1,21 +1,12 @@
 package preprocessor.preprocessor;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import geometry_objects.Segment;
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
-import input.InputFacade;
-import input.components.FigureNode;
 import preprocessor.delegates.ImplicitPointPreprocessor;
 
 import org.junit.jupiter.api.Test;

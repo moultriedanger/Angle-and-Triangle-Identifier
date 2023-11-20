@@ -1,12 +1,8 @@
 package preprocessor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.*;
 import geometry_objects.Segment;
-import geometry_objects.points.Point;
-import geometry_objects.points.PointDatabase;
-import geometry_objects.points.PointNamingFactory;
+import geometry_objects.points.*;
 import preprocessor.delegates.ImplicitPointPreprocessor;
 
 public class Preprocessor
@@ -88,16 +84,21 @@ public class Preprocessor
 
 		Set<Segment> impliedSeg = new HashSet<Segment>();
 
+		//Loops through the points and segments
 		for (Point p : _implicitPoints) {
 			for(Segment s : _givenSegments) {
+
+				//Checking if the segment between one implicit point and one given point is minimal
 				Segment s1 = new Segment(p, s.getPoint1());
 				if (s1.collectOrderedPointsOnSegment(_implicitPoints).size() == 1 && s.HasSubSegment(s1)) {
 					impliedSeg.add(new Segment(p, s.getPoint1()));
 				}
+				//Checking the other point
 				Segment s2 = new Segment(p, s.getPoint2());
 				if ((s2.collectOrderedPointsOnSegment(_implicitPoints).size()) == 1 && s.HasSubSegment(s2)) {
 					impliedSeg.add(new Segment(p, s.getPoint2()));
 				}
+				//Crafting the segments between two implicit points
 				for(Point p2 : _implicitPoints) {
 					if (s.pointLiesOn(p) && s.pointLiesOn(p2) && new Segment(p, p2).collectOrderedPointsOnSegment(_implicitPoints).size() == 2) {
 						impliedSeg.add(new Segment(p, p2));
@@ -111,7 +112,7 @@ public class Preprocessor
 
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> _implicitPoints, Set<Segment> _givenSegments, Set<Segment> _implicitSegments){
 
-		//Updating given segments/PDB
+		//Constructing sets of total points/segments to be used later
 		Set<Segment> totalSegments = new HashSet<Segment>();
 		for (Segment s : _implicitSegments) {
 			if(!totalSegments.contains(s))totalSegments.add(s);
@@ -134,7 +135,7 @@ public class Preprocessor
 		for(Segment s : totalSegments) {
 			Point start = s.getPoint1();
 			for(Point end : s.collectOrderedPointsOnSegment(totalPoints)){
-				//Break them up into minimal segments
+				//Break them up into minimal segments - start pointer stays one point further than end
 				if (start.equals(end))continue;
 				if (new Segment(start, end).collectOrderedPointsOnSegment(totalPoints).size() == 2) minimal.add(new Segment(start, end));
 				start = end;
@@ -147,14 +148,28 @@ public class Preprocessor
 
 		Set<Segment> nonMinimal = new HashSet<Segment>();
 
+		//Loop through points, see if they create non-minimal segment
 		for (Point start : _pointDatabase.getPoints()){
 			for (Point end : _pointDatabase.getPoints()){
-				if (new Segment (start, end).collectOrderedPointsOnSegment(_pointDatabase.getPoints()).size() > 2) {
-					nonMinimal.add(new Segment (start, end));
-				}
+				Segment s = new Segment(start, end);
+				//Only add if the segment is reachable with minimal segments and non minimal
+				if (s.collectOrderedPointsOnSegment(_pointDatabase.getPoints()).size() > 2 && canReach(s)) nonMinimal.add(s);
 			}
 		}
 		return nonMinimal;
+	}
+
+	private boolean canReach(Segment s) {
+		//Base case: It has reached an existing minimal segment distance away
+		if (_allMinimalSegments.contains(s)) return true;
+
+		//Check if you can creep forward, one minimal segment at a time
+		for (Point p : s.collectOrderedPointsOnSegment(_pointDatabase.getPoints())){
+			if (_allMinimalSegments.contains(new Segment(s.getPoint1(), p))) return canReach(new Segment(p, s.getPoint2()));
+		}
+
+		//Otherwise, return false
+		return false;
 	}
 
 }
