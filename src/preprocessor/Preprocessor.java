@@ -1,17 +1,10 @@
 package preprocessor;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
-
+import java.util.*;
+import geometry_objects.Segment;
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
 import preprocessor.delegates.ImplicitPointPreprocessor;
-import geometry_objects.Segment;
 
 public class Preprocessor
 {
@@ -106,20 +99,51 @@ public class Preprocessor
 	}
 	
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> _implicitPoints, Set<Segment> _givenSegments, Set<Segment> _implicitSegments){
+
+		//Updating given segments/PDB
+		Set<Segment> minimal = new HashSet<Segment>();
 		
-		Set<Segment> _minimalSegments = null;
-		
-		//If it contains a midpoint, its not a minimal segment.
-		//Do something:
-		
-		//c
-		
-		
-		return _minimalSegments;
+		Set<Segment> total = new HashSet<Segment>();
+		total.addAll(_implicitSegments);
+		total.addAll(_givenSegments);
+
+		Set<Point> totalP = new HashSet<Point>();
+		for (Point p : _implicitPoints) {
+			totalP.add(p);
+		}
+		for (Point p : _pointDatabase.getPoints()) {
+			totalP.add(p);
+		}
+
+
+		//Loop through segments, see if they have any other points on them.
+		for(Segment s : total) {
+			Point start = s.getPoint1();
+			for(Point end : s.collectOrderedPointsOnSegment(totalP)){
+
+				//Break them up into minimal segments
+				if (start.equals(end))continue;
+				minimal.add(new Segment(start, end));
+				start = end;
+			}
+		}
+		return minimal;
 	}
-	
+
+
 	private Set<Segment> constructAllNonMinimalSegments(Set<Segment> _allMinimalSegments) {
+
+		Set<Segment> nonMinimal = new HashSet<Segment>();
 		
-		return null;
+		for (Point start : _pointDatabase.getPoints()){
+			for (Point end : _pointDatabase.getPoints()){
+				if (new Segment (start, end).collectOrderedPointsOnSegment(_pointDatabase.getPoints()).size() > 2) {
+					nonMinimal.add(new Segment (start, end));
+				}
+			}
+		}
+		return nonMinimal;
 	}
 }
+
+
