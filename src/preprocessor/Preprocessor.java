@@ -88,10 +88,12 @@ public class Preprocessor
 
 		for (Point p : _implicitPoints) {
 			for(Segment s : _givenSegments) {
-				if (new Segment(p, s.getPoint1()).collectOrderedPointsOnSegment(_implicitPoints).size() == 2) {
+				Segment s1 = new Segment(p, s.getPoint1());
+				if (s1.collectOrderedPointsOnSegment(_implicitPoints).size() == 1 && s.HasSubSegment(s1)) {
 					impliedSeg.add(new Segment(p, s.getPoint1()));
 				}
-				if (new Segment(p, s.getPoint2()).collectOrderedPointsOnSegment(_implicitPoints).size() == 2) {
+				Segment s2 = new Segment(p, s.getPoint2());
+				if ((s2.collectOrderedPointsOnSegment(_implicitPoints).size()) == 1 && s.HasSubSegment(s2)) {
 					impliedSeg.add(new Segment(p, s.getPoint2()));
 				}
 				for(Point p2 : _implicitPoints) {
@@ -100,7 +102,7 @@ public class Preprocessor
 					}
 				}
 			}
-				
+
 		}
 		return impliedSeg;
 	}
@@ -150,6 +152,7 @@ public class Preprocessor
 		}
 		return nonMinimal;
 	}
+
 }
 
 

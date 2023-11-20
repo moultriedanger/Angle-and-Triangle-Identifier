@@ -73,19 +73,20 @@ class PreprocessorTest
 		PointDatabase points = pair.getKey();
 
 		Set<Segment> segments = pair.getValue();
-		for (Segment s : segments) {
-			System.out.println(s.getPoint1().getName() + " " + s.getPoint1().getX() +", " + s.getPoint1().getY() +  " -> " + s.getPoint2().getName() + " " + s.getPoint2().getX() +", " + s.getPoint2().getY());
-		}
+		
+//		for (Segment s : segments) {
+//			System.out.println(s.getPoint1().getName() + " " + s.getPoint1().getX() +", " + s.getPoint1().getY() +  " -> " + s.getPoint2().getName() + " " + s.getPoint2().getX() +", " + s.getPoint2().getY());
+//		}
 
 		Preprocessor pp = new Preprocessor(points, segments);
 
 		assertEquals(1, pp._implicitPoints.size());
 
 		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
-		for (Segment s : iSegments) {
-			System.out.println(s.getPoint1().getName() + " " + s.getPoint1().getX() +", " + s.getPoint1().getY() +  " -> " + s.getPoint2().getName() + " " + s.getPoint2().getX() +", " + s.getPoint2().getY());
-		}
-		//assertEquals(4, iSegments.size());
+//		for (Segment s : iSegments) {
+//			System.out.println(s.getPoint1().getName() + " " + s.getPoint1().getX() +", " + s.getPoint1().getY() +  " -> " + s.getPoint2().getName() + " " + s.getPoint2().getX() +", " + s.getPoint2().getY());
+//		}
+		assertEquals(4, iSegments.size());
 
 		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
 
@@ -144,9 +145,9 @@ class PreprocessorTest
 		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
 		
 
-//		for (Segment s : iSegments) {
-//			System.out.println(s.getPoint1().getName() + " " + s.getPoint1().getX() +", " + s.getPoint1().getY() +  " -> " + s.getPoint2().getName() + " " + s.getPoint2().getX() +", " + s.getPoint2().getY());
-//		}
+		for (Segment s : iSegments) {
+			System.out.println(s.getPoint1().getName() + " " + s.getPoint1().getX() +", " + s.getPoint1().getY() +  " -> " + s.getPoint2().getName() + " " + s.getPoint2().getX() +", " + s.getPoint2().getY());
+		}
 		assertEquals(15, iSegments.size());
 		//
 		//List<Segment> expectedISegments = new ArrayList<Segment>();
