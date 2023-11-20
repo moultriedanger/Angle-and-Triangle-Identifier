@@ -43,9 +43,9 @@ public class PointDatabase
 	/**
 	 * Add a point to the database.
 	 */
-	public void put(String name, double x, double y)
+	public Point put(String name, double x, double y)
 	{
-        _factory.put(name, x, y);
+        return _factory.put(name, x, y);
 	}
 
 	/**

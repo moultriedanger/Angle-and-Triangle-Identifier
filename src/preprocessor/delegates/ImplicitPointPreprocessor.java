@@ -23,7 +23,6 @@ public class ImplicitPointPreprocessor
 	{
 
 		//Used to name implicit points as they are created
-		PointNamingFactory pnf = new PointNamingFactory();
 		Set<Point> implicitPoints = new LinkedHashSet<Point>();
 
 		//Loop through list of segments twice, see if they intersect each other
@@ -33,10 +32,9 @@ public class ImplicitPointPreprocessor
 
 				//If they do intersect, add it to our implicit points
 				if (p != null && givenPoints.getPoint(p) == null) {
-					implicitPoints.add(pnf.put(p));
-					givenPoints.put(null, p.getX(), p.getY());
+					implicitPoints.add(givenPoints.put(null, p.getX(), p.getY()));
+					
 				}
-
 			}
 		}
 		return implicitPoints;

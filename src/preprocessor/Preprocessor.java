@@ -84,7 +84,7 @@ public class Preprocessor
 
 		Set<Segment> impliedSeg = new HashSet<Segment>();
 
-		//Loops through the points and segments
+
 		for (Point p : _implicitPoints) {
 			for(Segment s : _givenSegments) {
 
@@ -101,10 +101,11 @@ public class Preprocessor
 				//Crafting the segments between two implicit points
 				for(Point p2 : _implicitPoints) {
 					Segment s3 = new Segment(p, p2);
-					if (s.pointLiesOn(p) && s.pointLiesOn(p2) && s3.collectOrderedPointsOnSegment(_implicitPoints).size() == 2) impliedSeg.add(s3);
+					if (s.pointLiesOn(p) && s.pointLiesOn(p2) && s3.collectOrderedPointsOnSegment(_implicitPoints).size() == 2) {
+						impliedSeg.add(s3);
+					}
 				}
 			}
-
 		}
 		return impliedSeg;
 	}
@@ -135,9 +136,10 @@ public class Preprocessor
 			Point start = s.getPoint1();
 			for(Point end : s.collectOrderedPointsOnSegment(totalPoints)){
 				//Break them up into minimal segments - start pointer stays one point further than end
-				if (start.equals(end))continue;
-				if (new Segment(start, end).collectOrderedPointsOnSegment(totalPoints).size() == 2) minimal.add(new Segment(start, end));
-				start = end;
+				if (!start.equals(end)) {
+					if (new Segment(start, end).collectOrderedPointsOnSegment(totalPoints).size() == 2) minimal.add(new Segment(start, end));
+					start = end;
+				}
 			}
 		}
 		return minimal;
