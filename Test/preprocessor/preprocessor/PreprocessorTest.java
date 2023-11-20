@@ -21,7 +21,9 @@ class PreprocessorTest
 {	
 	@Test
 	void test_crossing_symmetric_triangle() {
-	
+		//
+		//Create figure, test all methods for correctness
+		//
 		FigureNode fig = InputFacade.extractFigure("JSON tests/crossing_symmetric_triangle.json");
 
 		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
@@ -87,19 +89,19 @@ class PreprocessorTest
 
 		Preprocessor pp = new Preprocessor(points, segments);
 		
-		assertEquals(2, pp._implicitPoints.size());
+		assertEquals(3, pp._implicitPoints.size());
 		
 		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
 
-		assertEquals(8, iSegments.size());
+		assertEquals(12, iSegments.size());
 		
 		Set<Segment> minimalSeg = pp.identifyAllMinimalSegments(pp._implicitPoints, pp._givenSegments, iSegments);
 
-		assertEquals(14, minimalSeg.size());
+		assertEquals(16, minimalSeg.size());
 		
 		Set<Segment> nonMin = pp.constructAllNonMinimalSegments(minimalSeg);
 		
-		assertEquals(8, nonMin.size());
+		assertEquals(10, nonMin.size());
 	}
 	
 	
@@ -146,9 +148,7 @@ class PreprocessorTest
 		// There are 15 implied segments inside the pentagon; see figure above
 
 		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
-		for (Segment s: iSegments) {
-			System.out.println(s.getPoint1().getName() + " " + s.getPoint2().getName());
-		}
+		
 		assertEquals(15, iSegments.size());
 		
 		Set<Segment> minimalSegs = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
@@ -246,8 +246,8 @@ class PreprocessorTest
 
 		for (Segment computedNonMinimalSegment : computedNonMinimalSegments)
 		{
-			//System.out.println(computedNonMinimalSegment.getPoint1().getName() + ", " + computedNonMinimalSegment.getPoint2().getName());
-			//assertTrue(expectedNonMinimalSegments.contains(computedNonMinimalSegment));
+			System.out.println(computedNonMinimalSegment.getPoint1().getName() + ", " + computedNonMinimalSegment.getPoint2().getName());
+			assertTrue(expectedNonMinimalSegments.contains(computedNonMinimalSegment));
 		}
 	}
 }

@@ -101,9 +101,7 @@ public class Preprocessor
 				//Crafting the segments between two implicit points
 				for(Point p2 : _implicitPoints) {
 					Segment s3 = new Segment(p, p2);
-					if (s.pointLiesOn(p) && s.pointLiesOn(p2) && s3.collectOrderedPointsOnSegment(_implicitPoints).size() == 2) {
-						if(s3.collectOrderedPointsOnSegment(_pointDatabase.getPoints()).size() == 0)impliedSeg.add(s3);
-					}
+					if (s.pointLiesOn(p) && s.pointLiesOn(p2) && s3.collectOrderedPointsOnSegment(_implicitPoints).size() == 2) impliedSeg.add(s3);
 				}
 			}
 
