@@ -17,6 +17,7 @@ import geometry_objects.angle.AngleEquivalenceClasses;
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
 import input.components.FigureNode;
+import preprocessor.Preprocessor;
 import input.InputFacade;
 
 class AngleIdentifierTest
