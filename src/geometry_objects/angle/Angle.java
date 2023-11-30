@@ -11,10 +11,11 @@
 
 package geometry_objects.angle;
 
-import exceptions.FactException;
+import geometry_objects.exceptions.FactException;
 import geometry_objects.Segment;
 import geometry_objects.points.Point;
 import utilities.math.MathUtilities;
+import utilities.math.analytic_geometry.GeometryUtilities;
 
 public class Angle implements Comparable<Angle>
 {
@@ -83,7 +84,7 @@ public class Angle implements Comparable<Angle>
 		double v2x = c.getX() - b.getX();
 		double v2y = c.getY() - b.getY();
 		double dotProd = v1x * v2x + v1y * v2y;
-		double cosAngle = dotProd / (Point.distance(a, b) * Point.distance(b, c));
+		double cosAngle = dotProd / (GeometryUtilities.distance(a, b) * GeometryUtilities.distance(b, c));
 
 		// Avoid minor calculation issues and retarget the given value to specific angles. 
 		// 0 or 180 degrees
@@ -173,6 +174,8 @@ public class Angle implements Comparable<Angle>
 	@Override
 	public boolean equals(Object obj)
 	{
-		// TODO
+		Angle that = (Angle) obj;
+		
+		return this._ray1Endpoint.equals(that._ray1Endpoint) && this._ray2Endpoint.equals(that._ray2Endpoint) && this.overlays(that);
 	}
 }
