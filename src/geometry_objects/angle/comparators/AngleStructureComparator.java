@@ -60,6 +60,13 @@ public class AngleStructureComparator implements Comparator<Angle>
 	@Override
 	public int compare(Angle left, Angle right)
 	{
-        // TODO
+		//sees if angles are equivalent
+		if (!left.overlays(right)) return Integer.MAX_VALUE;
+		//sees if the left angle's rays is always greater then the right angle's rays
+		//NOTICE: may need to check if rays are collinear for both the if statements below, but that will get messy
+		if (left.getRay1().HasSubSegment(right.getRay1()) && left.getRay2().HasSubSegment(right.getRay2())) return 1;
+		//sees if the right angle's rays is always greater then the left angle's rays
+		if (right.getRay1().HasSubSegment(left.getRay1()) && right.getRay2().HasSubSegment(left.getRay2())) return -1;
+		return 0;
 	}
 }
