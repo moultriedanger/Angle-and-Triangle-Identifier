@@ -11,7 +11,7 @@
 
 package geometry_objects.angle;
 
-import geometry_objects.exceptions.FactException;
+import exceptions.FactException;
 import geometry_objects.Segment;
 import geometry_objects.points.Point;
 import utilities.math.MathUtilities;
@@ -62,7 +62,7 @@ public class Angle implements Comparable<Angle>
 
 		_ray1 = r1;
 		_ray2 = r2;
-
+ 
 		_measure = Math.toDegrees(findAngle(_ray1Endpoint, _vertex, _ray2Endpoint));
 
 		if (_measure <= 0) throw new FactException("Measure of " + this.toString() + " is ZERO");
