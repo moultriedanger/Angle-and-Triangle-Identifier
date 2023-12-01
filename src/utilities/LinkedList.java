@@ -18,7 +18,7 @@ public class LinkedList<T> {
 	protected Node _tail;
 	protected int _size;
 	
-	LinkedList(){
+	public LinkedList(){
 		//Create head and tail
 		_tail = new Node(null, null);
 		_head = new Node(null, _tail);
