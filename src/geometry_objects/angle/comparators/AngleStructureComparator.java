@@ -75,7 +75,8 @@ public class AngleStructureComparator implements Comparator<Angle>
 				&& right.getRay2().HasSubSegment(left.getRay2())) return -1;
 		if (right.getRay1().HasSubSegment(left.getRay2())
 				&& right.getRay2().HasSubSegment(left.getRay1())) return -1;
-
+		
+		//bigger rays between angles alternate
 		return 0;
 	}
 }

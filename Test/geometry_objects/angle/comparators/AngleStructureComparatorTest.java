@@ -37,6 +37,9 @@ class AngleStructureComparatorTest extends AngleStructureComparator {
 		Segment AE=new Segment(A, E);
 		Segment AD=new Segment(A, D);
 		Segment AF=new Segment(A, F);
+		//necessary for straight angles
+		Segment BD=new Segment(B, D);
+		Segment CE=new Segment(C, E);
 		
 		Angle BAC= new Angle(AB, AC);
 		Angle DAC=new Angle(AD, AC);
@@ -44,6 +47,8 @@ class AngleStructureComparatorTest extends AngleStructureComparator {
 		Angle DAE=new Angle(AD, AE);
 		Angle CAF=new Angle(AC, AF);
 		Angle DAF=new Angle(AD, AF);
+
+		
 		
 		//reverse rays
 		Angle CAB=new Angle(AC, AB);
@@ -55,7 +60,7 @@ class AngleStructureComparatorTest extends AngleStructureComparator {
 		
 		//NOTICE: What should an equal angle return
 		
-		//should return error
+		//not equivalent angles
 		assertEquals (compare(BAC, CAF), AngleStructureComparator.STRUCTURALLY_INCOMPARABLE);
 		assertEquals (compare(DAC, DAF), AngleStructureComparator.STRUCTURALLY_INCOMPARABLE);
 		assertEquals (compare(DAE, CAF), AngleStructureComparator.STRUCTURALLY_INCOMPARABLE);
@@ -149,9 +154,7 @@ class AngleStructureComparatorTest extends AngleStructureComparator {
 		Angle FAC=new Angle(AF, AC);
 		Angle FAD=new Angle(AF, AD);
 		
-		//NOTICE: What should an equal angle return
-		
-		//should return error
+		//not equivalent angles
 		assertEquals (compare(BAC, CAF), AngleStructureComparator.STRUCTURALLY_INCOMPARABLE);
 		assertEquals (compare(DAC, DAF), AngleStructureComparator.STRUCTURALLY_INCOMPARABLE);
 		assertEquals (compare(DAE, CAF), AngleStructureComparator.STRUCTURALLY_INCOMPARABLE);
@@ -198,5 +201,83 @@ class AngleStructureComparatorTest extends AngleStructureComparator {
 		assertEquals(compare(EAB, CAD), 0);
 		
 	}
+	
+	@Test
+	void lineComparatorTest() throws FactException {
+		/**
+		 *             E
+		 *            /
+		 *           D
+		 *          /
+		 *         /
+		 *        /
+		 *       C
+		 *      /|
+		 *     / |
+		 *    B  |
+		 *   /   |
+		 *  /    |
+		 * A     |
+		 *       F
+		 */
+		Point A=new Point("A", -3, -3);
+		Point B=new Point("B", -1, -1);
+		Point C=new Point("C", 1, 1);
+		Point D=new Point("D", 4, 4);
+		Point E=new Point("E", 5, 5);
+		Point F=new Point("F", 1, -4);
+		
+		Segment AB=new Segment(B, A);
+		Segment BD=new Segment(B, D);
+		Segment AC=new Segment(C, A);
+		Segment CE=new Segment(C, E);
+		Segment BC=new Segment(C, B);
+		Segment CD=new Segment(C, D);
+		Segment CF=new Segment(C, F);
+		
+		Angle ABC=new Angle(AB, BC);
+		Angle ABD=new Angle(AB, BD);
+		Angle ACE=new Angle(AC, CE);
+		Angle BCD=new Angle(BC, CD);
+		Angle BCF=new Angle(BC, CF);
+		
+		
+		Angle CBA=new Angle(BC, AB);
+		Angle DBA=new Angle(BD, AB);
+		Angle ECA=new Angle(CE, AC);
+		Angle DCB=new Angle(CD, BC);
+		Angle FCB=new Angle(CF, BC);
+		
+		//not equivalent angles
+		assertEquals (compare(BCD, BCF), AngleStructureComparator.STRUCTURALLY_INCOMPARABLE);
+		assertEquals (compare(BCF, BCD), AngleStructureComparator.STRUCTURALLY_INCOMPARABLE);
+		assertEquals (compare(DCB, BCF), AngleStructureComparator.STRUCTURALLY_INCOMPARABLE);
+		assertEquals (compare(DCB, FCB), AngleStructureComparator.STRUCTURALLY_INCOMPARABLE);
+		
+		//left angle is greater then right
+		//only one ray is bigger the other is equal
+		assertEquals (compare(ABD, ABC), 1);
+		assertEquals (compare(ABD, CBA), 1);
+		assertEquals (compare(DBA, ABC), 1);
+		assertEquals (compare(DBA, CBA), 1);
+		//both rays are bigger
+		assertEquals (compare(ACE, BCD), 1);
+		assertEquals (compare(ACE, DCB), 1);
+		assertEquals (compare(ECA, BCD), 1);
+		assertEquals (compare(ECA, DCB), 1);
 
+		//right angle is greater then left
+		//only one ray is bigger the other is equal
+		assertEquals (compare(ABC, ABD), -1);
+		assertEquals (compare(CBA, ABD), -1);
+		assertEquals (compare(ABC, DBA), -1);
+		assertEquals (compare(CBA, DBA), -1);
+		//both rays are bigger
+		assertEquals (compare(BCD, ACE), -1);
+		assertEquals (compare(DCB, ACE), -1);
+		assertEquals (compare(BCD, ECA), -1);
+		assertEquals (compare(DCB, ECA), -1);
+		
+		//NO TEST: It is not possible for bigger rays between straight angles to alternate
+	}
 }
