@@ -17,23 +17,22 @@ class AngleLinkedEquivalenceClassTest {
 	 * Given the figure below:
 	 * 
 	 *    A-------B----C-----------D
-	 *     \
-	 *      \
-	 *       \
-	 *        E
-	 *         \
-	 *          \
-	 *           F
+	 *    |\
+	 *    | \
+	 *    |  \
+	 *    |   E
+	 *    |    \
+	 *    |     \
+	 *    G      F
 	 * 
 	 * Equivalence classes structure we want:
 	 * 
 	 *   canonical = BAE
 	 *   rest = BAF, CAE, DAE, CAF, DAF
 	 */
-	
 
 	@Test
-	void testAdd() throws FactException{
+	void testAdd(){
 		//Simple test
 		Point a = new Point("A", 0, 6);
 		Point b = new Point("B", 3, 6);
@@ -41,6 +40,7 @@ class AngleLinkedEquivalenceClassTest {
 		Point d = new Point("D", 6, 6);
 		Point e = new Point("E", 1, 5);
 		Point f = new Point("F", 2, 4);
+		Point g = new Point("G", 0, 4);
 		
 		//BAE
 		Segment ae = new Segment(a,e);
@@ -65,14 +65,19 @@ class AngleLinkedEquivalenceClassTest {
 		//DAF
 		Segment ad_2 = new Segment(a,d);
 		
+		//GAB
+		Segment ag = new Segment(a,g);
 		
 		
 		//Add all the angles
 		Angle bae = null;
-		bae = new Angle(ae, ab);
-	
-//		System.out.println("bae error");
 		
+		try {
+			bae = new Angle(ae, ab);
+		} catch (FactException l) {
+	
+			System.out.println("bae error");
+		}
 		
 		Angle baf = null;
 		try {
@@ -114,6 +119,14 @@ class AngleLinkedEquivalenceClassTest {
 			System.out.println("daf error");
 		}
 	
+		Angle gab = null;
+		try {
+			gab = new Angle(ag, ab);
+		} catch (FactException l) {
+	
+			System.out.println("daf error");
+		}
+	
 		AngleLinkedEquivalenceClass cl = new AngleLinkedEquivalenceClass(new AngleStructureComparator());
 
 		cl.add(baf);
@@ -127,9 +140,15 @@ class AngleLinkedEquivalenceClassTest {
 		assertEquals (3, cl.size());
 		System.out.println(cl.toString());
 		
+		cl.add(dae);
+		cl.add(caf);
 		cl.add(daf);
-		assertEquals (4, cl.size());
+		assertEquals (6, cl.size());
 		assertTrue (cl.contains(daf));
+		System.out.println(cl.toString());
+		
+		cl.add(gab);
+		assertEquals (6, cl.size());
 	}
 
 	@Test

@@ -113,8 +113,6 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 //	}
 	
 	public String toString() {
-		//DISCLAIMER: May need to iterate through the LinkedList and call 
-		//to string on each angle, will see in testing
 		return super.toString();
 	}
 }

@@ -29,10 +29,11 @@ import utilities.EquivalenceClasses;
 public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 {
 	
-	private List<LinkedEquivalenceClass<Angle>> _classes;
+	private List<AngleLinkedEquivalenceClass> _classes;
 	
 	public AngleEquivalenceClasses(Comparator<Angle> comparator){
 		super(comparator);
+		_classes = new ArrayList<AngleLinkedEquivalenceClass>();
 	}
 	
 	@Override
@@ -44,7 +45,7 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 			
 		//If element does not belong to classList, create a new class and add it to the List
 		if (classIndex == -1) {
-			AngleLinkedEquivalenceClass list = new AngleLinkedEquivalenceClass(_comparator);
+			AngleLinkedEquivalenceClass list = new AngleLinkedEquivalenceClass(new AngleStructureComparator());
 			
 			//Make the element the canonical
 			list.add(element);
@@ -63,15 +64,40 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 		return super.contains(element);
 	}
 	
+	protected int indexOfClass(Angle element) {
+		
+		for(int i = 0; i < _classes.size(); i ++) {
+			if (_classes.get(i).belongs(element)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	@Override
 	public int size() {
-		return super.size();
-	}
-	
+		
+		int total = 0;
+		for(AngleLinkedEquivalenceClass c: _classes) {
+			//Add size of each class to total
+			total += c.size();
+		}
+        return total;
+    }
+
+	@Override
 	public int numClasses() {
-		return super.numClasses();
+		return _classes.size();
 	}
 	
-	public String toString() {
-		return super.toString();
+	@Override
+	public String toString() {	
+		
+		String result = "";
+		
+		for(AngleLinkedEquivalenceClass l : _classes) {
+			result += l.toString()+ ",\n";
+		}
+		return result;
 	}
 }
