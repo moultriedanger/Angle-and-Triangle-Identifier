@@ -72,23 +72,35 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 		if (a == null) return false;
 		
 		return _comparator.compare(_canonical, a) != AngleStructureComparator.STRUCTURALLY_INCOMPARABLE;
-		
 	}
 	
 	@Override
 	public boolean demoteAndSetCanonical(Angle a) {
 		//Add if the list is empty
-		if (this.isEmpty()) {
+		if (!belongs(a)) return false;
+		
+		else if (this.isEmpty()) {
 			this.add(a);
 			return true;
 		}
-		//DISCLAIMER: I'm not sure what to do when comparator equals 0 so
-		//once we get word from Alvin this will likely need updating
-		if (_comparator.compare(_canonical, a) != AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) {
+
+		if (_comparator.compare(_canonical, a) != AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) return false;
+	
+		else if (_comparator.compare(a,_canonical)== -1){
+			
+			Angle fallenKing = _canonical;
+			
+			//sets canonical to given angle
 			_canonical = a;
+			
+			//adds old canonical to front of linked list
+			_rest.addToFront(fallenKing);
 			return true;
 		}
-		return false;
+		
+		//Add structurally comparable element to rest of list
+		_rest.addToFront(a);
+		return true;
 	}
 	
 	//HEADS UP: Will likely have to do remove as well

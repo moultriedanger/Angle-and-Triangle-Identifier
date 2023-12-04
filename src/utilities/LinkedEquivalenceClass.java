@@ -79,7 +79,7 @@ public class LinkedEquivalenceClass<T>{
 		}
 		return _rest.remove(element);
 	}
-
+	
 	//Check this
 	public boolean removeCanonical(T element) {
 		if(_canonical == null || !element.equals(_canonical)) return false;

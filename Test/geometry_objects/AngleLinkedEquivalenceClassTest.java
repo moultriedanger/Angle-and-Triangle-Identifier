@@ -3,32 +3,225 @@ package geometry_objects;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import geometry_objects.*;
+import geometry_objects.points.Point;
+import geometry_objects.angle.Angle;
+import geometry_objects.angle.AngleEquivalenceClasses;
+import geometry_objects.angle.AngleLinkedEquivalenceClass;
+import geometry_objects.angle.comparators.AngleStructureComparator;
+import exceptions.FactException;
 
 class AngleLinkedEquivalenceClassTest {
 
+	/**
+	 * Given the figure below:
+	 * 
+	 *    A-------B----C-----------D
+	 *     \
+	 *      \
+	 *       \
+	 *        E
+	 *         \
+	 *          \
+	 *           F
+	 * 
+	 * Equivalence classes structure we want:
+	 * 
+	 *   canonical = BAE
+	 *   rest = BAF, CAE, DAE, CAF, DAF
+	 */
+	
+
 	@Test
-	void testToString() {
-		fail("Not yet implemented");
+	void testAdd() {
+		//Simple test
+		Point a = new Point("A", 0, 6);
+		Point b = new Point("B", 3, 6);
+		Point c = new Point("C", 4, 6);
+		Point d = new Point("D", 6, 6);
+		Point e = new Point("E", 1, 5);
+		Point f = new Point("F", 2, 4);
+		
+		//BAE
+		Segment ae = new Segment(a,e);
+		Segment ab = new Segment(a,b);
+		
+		//BAF
+		Segment af = new Segment(a,f);
+		Segment ab_2 = new Segment(a,b);
+		
+		//CAE
+		Segment ae_2 = new Segment(a,e);
+		Segment ac = new Segment(a,c);
+		
+		//DAE
+		Segment ae_3 = new Segment(a,e);
+		Segment ad = new Segment(a,d);
+		
+		//CAF 
+		Segment af_2 = new Segment(a,f);
+		Segment ac_2 = new Segment(a,c);
+		
+		//DAF
+		Segment ad_2 = new Segment(a,d);
+		Segment ac_3 = new Segment(a,c);
+		
+		
+		//Add all the angles
+		Angle bae = null;
+		try {
+			bae = new Angle(ae, ab);
+		} catch (FactException l) {
+	
+			System.out.println("bae error");
+		}
+		
+		Angle baf = null;
+		try {
+			baf = new Angle(af, ab_2);
+		} catch (FactException l) {
+	
+			System.out.println("baf error");
+		}
+		
+		Angle cae = null;
+		try {
+			cae = new Angle(ae_2, ac);
+		} catch (FactException l) {
+	
+			System.out.println("cae error");
+		}
+		
+		Angle dae = null;
+		try {
+			cae = new Angle(ae_3, ad);
+		} catch (FactException l) {
+	
+			System.out.println("dae error");
+		}
+		
+		Angle caf = null;
+		try {
+			caf = new Angle(af_2, ac_2);
+		} catch (FactException l) {
+	
+			System.out.println("caf error");
+		}
+		
+//		Angle daf = null;
+//		try {
+//			caf = new Angle(ad_2, ac_3);
+//		} catch (FactException l) {
+//	
+//			System.out.println("daf error");
+//		}
+	
+		AngleLinkedEquivalenceClass cl = new AngleLinkedEquivalenceClass(new AngleStructureComparator());
+
+		cl.add(baf);
+		cl.add(cae);
+		
+		assertEquals (2, cl.size());
+		System.out.println(cl.toString());
+		
+		//This should be the new canonical
+		cl.add(bae);
+		assertEquals (3, cl.size());
+		System.out.println(cl.toString());
+		
+		cl.add(caf);
+		assertEquals (4, cl.size());
+		
+		//dae doesnt add?
 	}
 
 	@Test
-	void testAngleLinkedEquivalenceClass() {
-		fail("Not yet implemented");
+	void testBelongs() {
+		//Simple test
+		Point a = new Point("A", 0, 6);
+		Point b = new Point("B", 3, 6);
+		Point c = new Point("C", 4, 6);
+		Point d = new Point("D", 6, 6);
+		Point e = new Point("E", 1, 5);
+		Point f = new Point("F", 2, 4);
+		
+		//BAE
+		Segment ae = new Segment(a,e);
+		Segment ab = new Segment(a,b);
+		
+		//BAF
+		Segment af = new Segment(a,f);
+		Segment ab_2 = new Segment(a,b);
+		
+		//CAE
+		Segment ae_2 = new Segment(a,e);
+		Segment ac = new Segment(a,c);
+		
+		//DAE
+		Segment ae_3 = new Segment(a,e);
+		Segment ad = new Segment(a,d);
+		
+		//CAF 
+		Segment af_2 = new Segment(a,f);
+		Segment ac_2 = new Segment(a,c);
+		
+		//DAF
+		Segment ad_2 = new Segment(a,d);
+		Segment ac_3 = new Segment(a,c);
+		
+		
+		//Add all the angles
+		Angle bae = null;
+		try {
+			bae = new Angle(ae, ab);
+		} catch (FactException l) {
+	
+			System.out.println("bae error");
+		}
+		
+		Angle baf = null;
+		try {
+			baf = new Angle(af, ab_2);
+		} catch (FactException l) {
+	
+			System.out.println("baf error");
+		}
+		
+		Angle cae = null;
+		try {
+			cae = new Angle(ae_2, ac);
+		} catch (FactException l) {
+	
+			System.out.println("cae error");
+		}
+		
+		Angle dae = null;
+		try {
+			cae = new Angle(ae_3, ad);
+		} catch (FactException l) {
+	
+			System.out.println("dae error");
+		}
+		
+		Angle caf = null;
+		try {
+			caf = new Angle(af_2, ac_2);
+		} catch (FactException l) {
+	
+			System.out.println("caf error");
+		}
+		
+		
 	}
-
-	@Test
-	void testAddAngle() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testBelongsAngle() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testDemoteAndSetCanonicalAngle() {
-		fail("Not yet implemented");
-	}
+//
+//	@Test
+//	void testDemoteAndSetCanonical() {
+//		fail("Not yet implemented");
+//	}
+//	
+//	@Test
+//	void testToString() {
+//		fail("Not yet implemented");
+//	}
 
 }

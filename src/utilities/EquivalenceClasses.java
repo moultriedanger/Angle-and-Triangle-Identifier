@@ -55,7 +55,7 @@ public class EquivalenceClasses<T> {
 		return _classes.size();
 	}
 	
-	private int indexOfClass(T element) {
+	protected int indexOfClass(T element) {
 		
 		for(int i = 0; i < _classes.size(); i ++) {
 			if (_classes.get(i).belongs(element)) {
