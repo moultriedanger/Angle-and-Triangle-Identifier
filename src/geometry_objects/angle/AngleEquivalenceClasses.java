@@ -54,7 +54,4 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 	public String toString() {
 		return super.toString();
 	}
-	
-	
-	
 }

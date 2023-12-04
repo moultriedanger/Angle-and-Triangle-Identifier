@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import geometry_objects.*;
 import geometry_objects.points.Point;
 import geometry_objects.angle.Angle;
-import geometry_objects.exceptions.FactException;
+import exceptions.FactException;
 
 class AngleTest {
 

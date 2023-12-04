@@ -51,33 +51,32 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 			Angle fallenKing = _canonical;
 			
 			//sets canonical to given angle
-			_canonical=a;
+			_canonical = a;
 			
 			//adds old canonical to front of linked list
 			_rest.addToFront(fallenKing);
 			return true;
 		}
 		
+		//If the angle is indeterminate or greater than the canonical
 		else if (_comparator.compare(a, _canonical) == 0 || _comparator.compare(a, _canonical) == 1) {
-			//didn't call add because it would have checked unnecessary if statements
+		
 			_rest.addToFront(a);
 			return true;
 		}
-		//DISCLAIMER: I'm not sure what to do when comparator equals 0 so
-		//once we get word from Alvin this will likely need updating
 		return false;
 	}
+	
 	@Override
 	public boolean belongs(Angle a) {
 		if (a == null) return false;
-		//Check if the canonical belongs to a class
 		
 		if(_comparator.compare(_canonical, a) == AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) return false;
 		
-		//DISCLAIMER: I'm not sure what to do when comparator equals 0 so
-		//once we get word from Alvin this will likely need updating
-		return (_comparator.compare(_canonical, a)==0 || _comparator.compare(_canonical, a) == -1) || (_comparator.compare(_canonical, a) == -1);
+		return true;
+		//(_comparator.compare(_canonical, a) ==0 || _comparator.compare(_canonical, a) == 1) || (_comparator.compare(_canonical, a) == -1);
 	}
+	
 	@Override
 	public boolean demoteAndSetCanonical(Angle a) {
 		//Add if the list is empty
@@ -95,6 +94,13 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	}
 	
 	//HEADS UP: Will likely have to do remove as well
+	
+//	public boolean remove(Angle element) {
+//		if(element == null || element.equals(_canonical)) {
+//			return false;
+//		}
+//		return _rest.remove(element);
+//	}
 	
 	@Override
 	public String toString() {
