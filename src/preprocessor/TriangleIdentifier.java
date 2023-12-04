@@ -19,7 +19,7 @@ public class TriangleIdentifier
 	{
 		_segments = segments;
 	}
-
+	
 	/*
 	 * Compute the figure triangles on the fly when requested;
 	 * memoize results for subsequent calls.

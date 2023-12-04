@@ -32,26 +32,33 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	public AngleLinkedEquivalenceClass(Comparator<Angle> comparator) {
 		super(comparator);
 	}
+	
 	@Override
 	public boolean add(Angle a) {
 		if (a == null) return false;
+		
 		//Canonical becomes first element
 		if(this.isEmpty()) {
 			_canonical = a;
 			return true;
 		}
+		
 		//Compare comparator and element to check equivalence
-		if(_comparator.compare(_canonical, a) == AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) return false;
-		//if compare equals 1 then a is structurally less then the current canonical and must take it's place
-		if (_comparator.compare(_canonical, a) == 1) {
-			Angle fallenKing=_canonical;
+		else if(_comparator.compare(a, _canonical) == AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) return false;
+		
+		//if compare equals -1 then a is structurally less then the current canonical and must take it's place
+		else if (_comparator.compare(a, _canonical) == -1) {
+			Angle fallenKing = _canonical;
+			
 			//sets canonical to given angle
 			_canonical=a;
+			
 			//adds old canonical to front of linked list
 			_rest.addToFront(fallenKing);
 			return true;
 		}
-		if(_comparator.compare(_canonical, a) == -1) {
+		
+		else if (_comparator.compare(a, _canonical) == 0 || _comparator.compare(a, _canonical) == 1) {
 			//didn't call add because it would have checked unnecessary if statements
 			_rest.addToFront(a);
 			return true;
@@ -64,9 +71,12 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	public boolean belongs(Angle a) {
 		if (a == null) return false;
 		//Check if the canonical belongs to a class
+		
+		if(_comparator.compare(_canonical, a) == AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) return false;
+		
 		//DISCLAIMER: I'm not sure what to do when comparator equals 0 so
 		//once we get word from Alvin this will likely need updating
-		return (_comparator.compare(_canonical, a)==1 || _comparator.compare(_canonical, a)==-1);
+		return (_comparator.compare(_canonical, a)==0 || _comparator.compare(_canonical, a) == -1) || (_comparator.compare(_canonical, a) == -1);
 	}
 	@Override
 	public boolean demoteAndSetCanonical(Angle a) {
