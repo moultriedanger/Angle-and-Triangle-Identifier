@@ -1,5 +1,6 @@
 package preprocessor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +25,7 @@ public class TriangleIdentifier
 	 * Compute the figure triangles on the fly when requested;
 	 * memoize results for subsequent calls.
 	 */
-	public Set<Triangle> getTriangles()
+	public Set<Triangle> getTriangles() throws FactException
 	{
 		if (_triangles != null) return _triangles;
 
@@ -35,8 +36,26 @@ public class TriangleIdentifier
 		return _triangles;
 	}
 
-	private void computeTriangles()
+	private void computeTriangles() throws FactException
 	{
-		// TODO
+		for (Segment seg1: _segments.values()) {
+			for (Segment seg2: _segments.values()) {
+				for (Segment seg3: _segments.values()) {
+					if (!(seg1.equals(seg2) && !(seg2.equals(seg3)))){
+						if ((seg1.sharedVertex(seg2) != null) && (seg2.sharedVertex(seg3) != null) && (seg3.sharedVertex(seg1) != null)){
+							
+							List<Segment> segs = new ArrayList<Segment>();
+							segs.add(seg1);
+							segs.add(seg2);
+							segs.add(seg3);
+							
+							Triangle newTriangle = new Triangle(segs);
+							
+							_triangles.add(newTriangle);
+						}
+					} 
+				}
+			}
+		}
 	}
 }
