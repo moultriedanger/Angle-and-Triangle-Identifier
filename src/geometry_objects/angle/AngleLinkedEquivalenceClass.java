@@ -71,10 +71,8 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	public boolean belongs(Angle a) {
 		if (a == null) return false;
 		
-		if(_comparator.compare(_canonical, a) == AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) return false;
+		return _comparator.compare(_canonical, a) != AngleStructureComparator.STRUCTURALLY_INCOMPARABLE;
 		
-		return true;
-		//(_comparator.compare(_canonical, a) ==0 || _comparator.compare(_canonical, a) == 1) || (_comparator.compare(_canonical, a) == -1);
 	}
 	
 	@Override
@@ -86,7 +84,7 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 		}
 		//DISCLAIMER: I'm not sure what to do when comparator equals 0 so
 		//once we get word from Alvin this will likely need updating
-		if (_comparator.compare(_canonical, a)==1 || _comparator.compare(_canonical, a)==-1) {
+		if (_comparator.compare(_canonical, a) != AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) {
 			_canonical = a;
 			return true;
 		}
@@ -102,18 +100,9 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 //		return _rest.remove(element);
 //	}
 	
-	@Override
 	public String toString() {
-		if(isEmpty()) return "";
-
-		String result = "";
-
-		result += _canonical.toString() + " | ";
-
 		//DISCLAIMER: May need to iterate through the LinkedList and call 
 		//to string on each angle, will see in testing
-		result += _rest.toString();
-
-		return result;
+		return super.toString();
 	}
 }
