@@ -1,4 +1,4 @@
-package preprocessor;
+package preprocessor.preprocessor;
 
 import static org.junit.jupiter.api.Assertions.*;
 

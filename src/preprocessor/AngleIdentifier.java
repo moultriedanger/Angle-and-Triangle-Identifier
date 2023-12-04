@@ -7,6 +7,7 @@ import exceptions.FactException;
 import geometry_objects.Segment;
 import geometry_objects.angle.Angle;
 import geometry_objects.angle.AngleEquivalenceClasses;
+import geometry_objects.points.Point;
 
 public class AngleIdentifier
 {
@@ -34,6 +35,18 @@ public class AngleIdentifier
 
 	private void computeAngles()
 	{
-		// TODO
+		for (Segment segment1: _segments.values()) {
+			for (Segment segment2: _segments.values()) {
+				//Check if the segments are not the same -- we do not want to waste time comparing the same segment/ray
+				if (!(segment1.equals(segment2))) {
+					Point sharedvertex = segment1.sharedVertex(segment2);
+					//Check if the sharedVertex is null -- a null vertex means we do not have a shared point with two segments/rays
+					if (sharedvertex != null) {
+						Angle angle = new Angle(segment1, segment2);
+						_angles.add(angle);
+					} 	
+				}
+			}
+		}
 	}
 }
