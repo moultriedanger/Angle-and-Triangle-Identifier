@@ -41,9 +41,21 @@ public class AngleIdentifier
 				if (!(segment1.equals(segment2))) {
 					Point sharedvertex = segment1.sharedVertex(segment2);
 					//Check if the sharedVertex is null -- a null vertex means we do not have a shared point with two segments/rays
-					if (sharedvertex != null) {
-						Angle angle = new Angle(segment1, segment2);
-						_angles.add(angle);
+					if (sharedvertex != null && !segment1.pointLiesBetweenEndpoints(segment2.other(sharedvertex)) && !segment2.pointLiesBetweenEndpoints(segment1.other(sharedvertex))) {
+						
+						Angle angle = null;
+						//System.out.println(segment1.getPoint1().getName() + segment1.getPoint2().getName() + " and " + segment2.getPoint1().getName() + segment2.getPoint2().getName());
+						try {
+							angle = new Angle(segment1, segment2);
+						} catch (FactException e) {
+							// TODO Auto-generated catch block
+							System.out.println("bad");
+							
+						}
+						if (!_angles.contains(angle)) {
+							_angles.add(angle);
+						}
+						
 					} 	
 				}
 			}

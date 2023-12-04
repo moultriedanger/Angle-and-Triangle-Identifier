@@ -31,27 +31,9 @@ class AngleEquivalenceClassesTest {
 		//BAE
 		Segment ae = new Segment(a,e);
 		Segment ab = new Segment(a,b);
-		
-		//BAF
 		Segment af = new Segment(a,f);
-		Segment ab_2 = new Segment(a,b);
-		
-		//CAE
-		Segment ae_2 = new Segment(a,e);
 		Segment ac = new Segment(a,c);
-		
-		//DAE
-		Segment ae_3 = new Segment(a,e);
 		Segment ad = new Segment(a,d);
-		
-		//CAF 
-		Segment af_2 = new Segment(a,f);
-		Segment ac_2 = new Segment(a,c);
-		
-		//DAF
-		Segment ad_2 = new Segment(a,d);
-		
-		//GAB
 		Segment ag = new Segment(a,g);
 		
 		
@@ -68,7 +50,7 @@ class AngleEquivalenceClassesTest {
 		
 		Angle baf = null;
 		try {
-			baf = new Angle(af, ab_2);
+			baf = new Angle(af, ab);
 		} catch (FactException l) {
 	
 			System.out.println("baf error");
@@ -76,7 +58,7 @@ class AngleEquivalenceClassesTest {
 		
 		Angle cae = null;
 		try {
-			cae = new Angle(ae_2, ac);
+			cae = new Angle(ae, ac);
 		} catch (FactException l) {
 	
 			System.out.println("cae error");
@@ -84,7 +66,7 @@ class AngleEquivalenceClassesTest {
 		
 		Angle dae = null;
 		try {
-			dae = new Angle(ae_3, ad);
+			dae = new Angle(ae, ad);
 		} catch (FactException l) {
 	
 			System.out.println("dae error");
@@ -92,7 +74,7 @@ class AngleEquivalenceClassesTest {
 		
 		Angle caf = null;
 		try {
-			caf = new Angle(af_2, ac_2);
+			caf = new Angle(af, ac);
 		} catch (FactException l) {
 	
 			System.out.println("caf error");
@@ -100,7 +82,7 @@ class AngleEquivalenceClassesTest {
 		
 		Angle daf = null;
 		try {
-			daf = new Angle(ad_2, af);
+			daf = new Angle(ad, af);
 		} catch (FactException l) {
 	
 			System.out.println("daf error");
