@@ -102,6 +102,7 @@ public class InputFacade
 		//iterates over the keys of the segments turning PointNodes into Points
 		for(PointNode pn1: setKey) {
 			Point pt1=pd.getPoint(pn1.getX(), pn1.getY());
+//			System.out.println(pn1.getName() + " " + pn1.getX() + ", " + pn1.getY());
 			//iterates through associated PointNodes of pn1, changing them to Points
 			for (PointNode pn2: (adjList.get(pn1))){
 				Point pt2=pd.getPoint(pn2.getX(), pn2.getY());
