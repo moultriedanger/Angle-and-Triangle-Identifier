@@ -41,57 +41,28 @@ public class TriangleIdentifier
 	{
 		Set<Segment> setSeg = _segments.keySet();
 		List<Segment> segs= new ArrayList<Segment>(setSeg);
+		//gets first side of the traingle
 		for (int i=0; i<segs.size(); i++) {
 			Segment side1 = segs.get(i);
 			for (int j=i+1; j<segs.size(); j++) {
 				Point sharedVert=side1.sharedVertex(segs.get(j));
+				//if side1 and the segment at index j share a point then find the third side
 				if (sharedVert != null) {
 					Segment side2=segs.get(j);
 					for (int k=j+1; k<segs.size(); k++) {
 						Segment side3 = segs.get(k);
+						//if segment at index k is the segment between side1 and side2 other points and side3 isn't collinear with them
 						if (side3.equals(new Segment(side1.other(sharedVert), side2.other(sharedVert))) && !side3.isCollinearWith(side1)) {
 							List<Segment> triangleSegs = new ArrayList<Segment>();
 							triangleSegs.add(side1);
 							triangleSegs.add(side2);
 							triangleSegs.add(side3);
-//							for (Segment s: triangleSegs) {
-//								System.out.println(s.getPoint1().getName() + s.getPoint2().getName());
-//							}
-//							System.out.println();
+							//computes triangle with the given
 							_triangles.add(new Triangle (triangleSegs));
-					}
-				}	
+						}
+					}	
+				}
 			}
 		}
-	}
-		
-		
-		
-//		for (Segment seg1: _segments.values()) {
-//			for (Segment seg2: _segments.values()) {
-//				
-//				for (Segment seg3: _segments.values()) {
-//					if (!(seg1.equals(seg2) && !(seg2.equals(seg3)))){
-//						if ((seg1.sharedVertex(seg2) != null) && (seg2.sharedVertex(seg3) != null) && (seg3.sharedVertex(seg1) != null)){
-//							
-//							List<Segment> segs = new ArrayList<Segment>();
-//							segs.add(seg1);
-//							segs.add(seg2);
-//							segs.add(seg3);
-//							
-//							System.out.println(seg1.getPoint1().getName() + seg1.getPoint2().getName());
-//							System.out.println(seg2.getPoint1().getName() + seg2.getPoint2().getName());
-//							System.out.println(seg3.getPoint1().getName() + seg3.getPoint2().getName());
-//							
-//							Triangle newTriangle = new Triangle(segs);
-//							
-//							System.out.println("high 5");
-//							
-//							_triangles.add(newTriangle);
-//						}
-//					} 
-//				}
-//			}
-//		}
 	}
 }

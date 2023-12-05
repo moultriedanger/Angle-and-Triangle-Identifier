@@ -1,7 +1,9 @@
 package preprocessor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import exceptions.FactException;
 import geometry_objects.Segment;
@@ -21,7 +23,7 @@ public class AngleIdentifier
 	}
 
 	/*
-	 * Compute the figure triangles on the fly when requested; memoize results for subsequent calls.
+	 * Compute the figure triangles on the fly when requested; memorize results for subsequent calls.
 	 */
 	public AngleEquivalenceClasses getAngles()
 	{
@@ -35,8 +37,12 @@ public class AngleIdentifier
 
 	private void computeAngles()
 	{
-		for (Segment segment1: _segments.values()) {
-			for (Segment segment2: _segments.values()) {
+		Set<Segment> setSeg = _segments.keySet();
+		List<Segment> segs= new ArrayList<Segment>(setSeg);
+		for (int i=0; i<segs.size(); i++) {
+			Segment segment1=segs.get(i);
+			for (int j=i+1; j<segs.size(); j++) {
+				Segment segment2=segs.get(j);
 				//Check if the segments are not the same -- we do not want to waste time comparing the same segment/ray
 				if (!(segment1.equals(segment2))) {
 					Point sharedvertex = segment1.sharedVertex(segment2);
@@ -48,9 +54,7 @@ public class AngleIdentifier
 						try {
 							angle = new Angle(segment1, segment2);
 						} catch (FactException e) {
-							// TODO Auto-generated catch block
-							System.out.println("bad");
-							
+							System.out.println("Compute Angle's given segments were bad");
 						}
 						if (!_angles.contains(angle)) _angles.add(angle);
 					} 	
@@ -59,3 +63,4 @@ public class AngleIdentifier
 		}
 	}
 }
+
