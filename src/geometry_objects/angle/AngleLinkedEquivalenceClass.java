@@ -112,6 +112,14 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 //		return _rest.remove(element);
 //	}
 	
+	@Override
+	public boolean contains(Angle target) {
+		//Make sure target belongs
+		if (!belongs(target)) return false;
+		//Check if target is equal to canonical or rest of list
+		return (target.equals(_canonical) || _rest.contains(target));
+	}
+	
 	public String toString() {
 		return super.toString();
 	}

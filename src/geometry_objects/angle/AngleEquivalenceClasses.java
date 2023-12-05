@@ -60,10 +60,16 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 			return true;
 		}
 	
-	public boolean contains(Angle element) {
-		return super.contains(element);
+	@Override
+	public boolean contains(Angle target) {
+		for (AngleLinkedEquivalenceClass equivalenceClass : _classes) {
+			if (equivalenceClass.contains(target)){
+				return true;
+			}
+		}
+		return false;
 	}
-	
+
 	protected int indexOfClass(Angle element) {
 		
 		for(int i = 0; i < _classes.size(); i ++) {

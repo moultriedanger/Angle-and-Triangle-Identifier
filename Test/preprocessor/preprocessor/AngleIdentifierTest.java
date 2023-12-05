@@ -47,7 +47,7 @@ class AngleIdentifierTest
 	//    B___C                               
 	//   / \ / \                              
 	//  /   X   \  X is not a specified point (it is implied) 
-	// D_________E
+	// D________E
 	//
 	// This figure contains 44 angles
 	//

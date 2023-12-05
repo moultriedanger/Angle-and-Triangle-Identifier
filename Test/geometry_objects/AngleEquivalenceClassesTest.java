@@ -96,7 +96,6 @@ class AngleEquivalenceClassesTest {
 			System.out.println("daf error");
 		}
 		
-		
 		//GAB
 		Angle gad = null;
 		try {
@@ -106,8 +105,6 @@ class AngleEquivalenceClassesTest {
 			System.out.println("daf error");
 		}
 				
-		
-		
 		//This should be the new canonical
 		classList.add(bae);
 		classList.add(daf);
