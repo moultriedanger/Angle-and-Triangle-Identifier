@@ -33,7 +33,6 @@ public class ImplicitPointPreprocessor
 				//If they do intersect, add it to our implicit points
 				if (p != null && givenPoints.getPoint(p) == null) {
 					implicitPoints.add(givenPoints.put(null, p.getX(), p.getY()));
-					
 				}
 			}
 		}
