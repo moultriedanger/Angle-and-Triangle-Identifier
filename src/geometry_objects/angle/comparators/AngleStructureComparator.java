@@ -63,8 +63,6 @@ public class AngleStructureComparator implements Comparator<Angle>
 		//sees if angles are equivalent
 		if (!left.overlays(right)) return STRUCTURALLY_INCOMPARABLE;
 		//sees if the left angle's rays is always greater then the right angle's rays
-		
-		//QUESTION: thoughts on making rays variables variables?
 		if (left.getRay1().HasSubSegment(right.getRay1()) 
 				&& left.getRay2().HasSubSegment(right.getRay2())) return 1;
 		if (left.getRay1().HasSubSegment(right.getRay2()) 
