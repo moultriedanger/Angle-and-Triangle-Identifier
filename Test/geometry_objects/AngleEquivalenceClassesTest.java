@@ -96,6 +96,7 @@ class AngleEquivalenceClassesTest {
 			System.out.println("daf error");
 		}
 		
+		
 		//GAB
 		Angle gad = null;
 		try {
@@ -105,6 +106,8 @@ class AngleEquivalenceClassesTest {
 			System.out.println("daf error");
 		}
 				
+		
+		
 		//This should be the new canonical
 		classList.add(bae);
 		classList.add(daf);
@@ -112,6 +115,8 @@ class AngleEquivalenceClassesTest {
 		
 		classList.add(gab);
 		classList.add(gad);
+		
+		assertTrue(classList.contains(bae));
 
 		assertEquals(2, classList.numClasses());
 		assertEquals(5,classList.size());
@@ -189,56 +194,51 @@ class AngleEquivalenceClassesTest {
 		
 		Angle BAC = null;
 		try {
-			new Angle(AB, AC);
+			BAC = new Angle(AB, AC);
 		} catch (FactException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("BAC error");
 		}
 		Angle DAC = null;
 		try {
-			new Angle(AD, AC);
+			DAC = new Angle(AD, AC);
 		} catch (FactException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("DAC error");
 		}
 		Angle BAE = null;
 		try {
-			new Angle(AB, AE);
+			BAE = new Angle(AB, AE);
 		} catch (FactException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("BAE error");
 		}
 		Angle DAE = null;
 		try {
-			new Angle(AD, AE);
+			DAE = new Angle(AD, AE);
 		} catch (FactException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("DAE error");
 		}
 		Angle CAF = null;
 		try {
-			new Angle(AC, AF);
+			CAF = new Angle(AC, AF);
 		} catch (FactException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("CAF error");
 		}
 		Angle DAF = null;
 		try {
-			new Angle(AD, AF);
+			DAF = new Angle(AD, AF);
 		} catch (FactException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("DAF error");
 		}
-
+		
+//		System.out.println(BAC.toString());
 		equivClass.add(BAC);
 		equivClass.add(DAC);
 		equivClass.add(BAE);
 		equivClass.add(DAE);
 		equivClass.add(CAF);
 		equivClass.add(DAF);
-		
-		System.out.println(equivClass.toString());
-		System.out.println(equivClass.size());
+//		
+//		System.out.println(equivClass.toString());
+//		System.out.println(equivClass.size());
 		
 		assertTrue(equivClass.contains(BAC));
 		assertTrue(equivClass.contains(DAC));
@@ -251,43 +251,43 @@ class AngleEquivalenceClassesTest {
 		
 		
 		//reverse rays
+		Angle CAB=null;
 		try {
-			Angle CAB=new Angle(AC, AB);
+			CAB=new Angle(AC, AB);
 		} catch (FactException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("CAB error");
 		}
+		Angle CAD=null;
 		try {
-			Angle CAD=new Angle(AC, AD);
+			CAD=new Angle(AC, AD);
 		} catch (FactException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("CAD error");
 		}
+		Angle EAB=null;
 		try {
-			Angle EAB=new Angle(AE, AB);
+			EAB=new Angle(AE, AB);
 		} catch (FactException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("EAB error");
 		}
+		Angle EAD=null;
 		try {
-			Angle EAD=new Angle(AE, AD);
+			EAD=new Angle(AE, AD);
 		} catch (FactException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("EAD error");
 		}
+		Angle FAC=null;
 		try {
-			Angle FAC=new Angle(AF, AC);
+			FAC=new Angle(AF, AC);
 		} catch (FactException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("FAC error");
 		}
+		Angle FAD = null;
 		try {
-			Angle FAD=new Angle(AF, AD);
+			FAD=new Angle(AF, AD);
 		} catch (FactException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("FAD error");
 		}
-		
+		assertTrue(equivClass.contains(CAB));
 		
 	}
 

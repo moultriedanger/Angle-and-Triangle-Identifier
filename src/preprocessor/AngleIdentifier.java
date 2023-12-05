@@ -52,10 +52,7 @@ public class AngleIdentifier
 							System.out.println("bad");
 							
 						}
-						if (!_angles.contains(angle)) {
-							_angles.add(angle);
-						}
-						
+						if (!_angles.contains(angle)) _angles.add(angle);
 					} 	
 				}
 			}

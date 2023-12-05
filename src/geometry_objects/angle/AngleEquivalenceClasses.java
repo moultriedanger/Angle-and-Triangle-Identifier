@@ -55,9 +55,9 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 			return true;
 			}
 		
-			//If element already belongs, add to corresponding class
-			_classes.get(classIndex).add(element);
-			return true;
+		//If element already belongs, add to corresponding class
+		_classes.get(classIndex).add(element);
+		return true;
 		}
 	
 	@Override
