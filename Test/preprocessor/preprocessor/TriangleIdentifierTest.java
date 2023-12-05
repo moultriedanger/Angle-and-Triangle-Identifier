@@ -16,6 +16,7 @@ import geometry_objects.Triangle;
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
 import input.components.FigureNode;
+import preprocessor.Preprocessor;
 import preprocessor.TriangleIdentifier;
 import input.InputFacade;
 
@@ -27,7 +28,7 @@ class TriangleIdentifierTest
 	
 	protected void init(String filename)
 	{
-		FigureNode fig = InputFacade.extractFigure("crossing_symmetric_triangle.json");
+		FigureNode fig = InputFacade.extractFigure("JSON tests/crossing_symmetric_triangle.json");
 
 		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
 
@@ -52,13 +53,18 @@ class TriangleIdentifierTest
 	@Test
 	void test_crossing_symmetric_triangle()
 	{
-		init("crossing_symmetric_triangle.json");
+		init("JSON tests/crossing_symmetric_triangle.json");
+		
 
 		TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
 
-		Set<Triangle> computedTriangles = triIdentifier.getTriangles();
-
-		System.out.println(computedTriangles);
+		Set<Triangle> computedTriangles = null;
+		try {
+			computedTriangles = triIdentifier.getTriangles();
+		} catch (FactException e) {
+			System.out.println("Triangle not computed");
+		}
+//		System.out.println(computedTriangles);
 
 		assertEquals(12, computedTriangles.size());
 
