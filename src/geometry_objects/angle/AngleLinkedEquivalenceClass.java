@@ -32,12 +32,7 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	public AngleLinkedEquivalenceClass(Comparator<Angle> comparator) {
 		super(comparator);
 	}
-	
-	public Angle canonical() {
-		return super.canonical();
-	}
-
-	
+		
 	@Override
 	public boolean add(Angle a) {
 		if (a == null) return false;
@@ -90,24 +85,12 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 
 		return add(a);
 	}
-	
-	public boolean remove(Angle target) {
-		return super.remove(target);
-	}
-	
-	public boolean removeCanonical(Angle target) {
-		return super.removeCanonical(target);
-	}
-		
+			
 	@Override
 	public boolean contains(Angle target) {
 		//Make sure target belongs
 		if (!belongs(target)) return false;
 		//Check if target is equal to canonical or rest of list
 		return (target.equals(_canonical) || _rest.contains(target));
-	}
-	
-	public String toString() {
-		return super.toString();
 	}
 }

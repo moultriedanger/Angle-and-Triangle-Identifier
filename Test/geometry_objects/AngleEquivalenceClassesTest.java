@@ -13,7 +13,6 @@ import geometry_objects.points.Point;
 
 class AngleEquivalenceClassesTest {
 
-	
 	@Test
 	void testAdd() {
 		
@@ -63,6 +62,7 @@ class AngleEquivalenceClassesTest {
 			System.out.println("bae error");
 		}
 		
+		//BAF
 		Angle baf = null;
 		try {
 			baf = new Angle(af, ab);
@@ -71,6 +71,7 @@ class AngleEquivalenceClassesTest {
 			System.out.println("baf error");
 		}
 		
+		//CAE
 		Angle cae = null;
 		try {
 			cae = new Angle(ae, ac);
@@ -79,6 +80,7 @@ class AngleEquivalenceClassesTest {
 			System.out.println("cae error");
 		}
 		
+		//DAE
 		Angle dae = null;
 		try {
 			dae = new Angle(ae, ad);
@@ -87,6 +89,7 @@ class AngleEquivalenceClassesTest {
 			System.out.println("dae error");
 		}
 		
+		//CAF
 		Angle caf = null;
 		try {
 			caf = new Angle(af, ac);
@@ -95,6 +98,7 @@ class AngleEquivalenceClassesTest {
 			System.out.println("caf error");
 		}
 		
+		//DAF
 		Angle daf = null;
 		try {
 			daf = new Angle(ad, af);
@@ -103,6 +107,7 @@ class AngleEquivalenceClassesTest {
 			System.out.println("daf error");
 		}
 	
+		//GAB
 		Angle gab = null;
 		try {
 			gab = new Angle(ag, ab);
@@ -111,8 +116,7 @@ class AngleEquivalenceClassesTest {
 			System.out.println("daf error");
 		}
 		
-		
-		//GAB
+		//gad
 		Angle gad = null;
 		try {
 			gad = new Angle(ag, ad);
@@ -121,13 +125,14 @@ class AngleEquivalenceClassesTest {
 			System.out.println("daf error");
 		}
 				
-		
-		//This should be the new canonical
+		//This should be the canonical
 		classList.add(bae);
-
 		classList.add(daf);
 		classList.add(baf);
 		
+		assertEquals(1, classList.numClasses());
+		
+		//Other class should add
 		classList.add(gab);
 		classList.add(gad);
 		
@@ -136,37 +141,11 @@ class AngleEquivalenceClassesTest {
 		assertEquals(2, classList.numClasses());
 		assertEquals(5,classList.size());
 		
-		
-//		cl.add(dae);
-//		cl.add(caf);
-//		cl.add(daf);
-//		assertEquals (6, cl.size());
-//		assertTrue (cl.contains(daf));
-//		System.out.println(cl.toString());
-//		
-//		cl.add(gab);
-//		assertEquals (6, cl.size());
+		classList.add(dae);
+		classList.add(caf);
+		classList.add(daf);
+		assertEquals (8, classList.size());
 	}
-	
-//	@Test
-//	void testSize() {
-//		
-//	}
-
-//	@Test
-//	void testNumClasses() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	void testAngleEquivalenceClasses() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	void testAddAngle() {
-//		fail("Not yet implemented");
-//	}
 	
 	@Test
 	void testContainsAngle() {
@@ -242,16 +221,22 @@ class AngleEquivalenceClassesTest {
 			System.out.println("DAF error");
 		}
 		
-//		System.out.println(BAC.toString());
+		assertFalse(equivClass.contains(BAC));
+		assertFalse(equivClass.contains(DAC));
+		
+		//Populate
 		equivClass.add(BAC);
 		equivClass.add(DAC);
+		
+		assertEquals(1, equivClass.numClasses());
+		
 		equivClass.add(BAE);
 		equivClass.add(DAE);
+		
 		equivClass.add(CAF);
 		equivClass.add(DAF);
-//		
-//		System.out.println(equivClass.toString());
-//		System.out.println(equivClass.size());
+		
+		assertEquals(3, equivClass.numClasses());
 		
 		assertTrue(equivClass.contains(BAC));
 		assertTrue(equivClass.contains(DAC));
@@ -299,7 +284,12 @@ class AngleEquivalenceClassesTest {
 		}
 
 		assertTrue(equivClass.contains(CAB));
-	
+		assertTrue(equivClass.contains(CAD));
+		assertTrue(equivClass.contains(EAB));
+		assertTrue(equivClass.contains(EAD));
+		assertTrue(equivClass.contains(FAC));
+		assertTrue(equivClass.contains(FAD));
+		
+		assertEquals(3, equivClass.numClasses());
 	}
-
 }

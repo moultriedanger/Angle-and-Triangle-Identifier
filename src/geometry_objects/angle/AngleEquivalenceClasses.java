@@ -28,7 +28,6 @@ import utilities.EquivalenceClasses;
 
 public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 {
-	
 	private List<AngleLinkedEquivalenceClass> _classes;
 	
 	public AngleEquivalenceClasses(Comparator<Angle> comparator){

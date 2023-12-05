@@ -115,6 +115,3 @@ public class LinkedEquivalenceClass<T>{
 		return result;
 	}
 }
-
-
-
