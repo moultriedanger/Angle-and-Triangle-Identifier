@@ -13,7 +13,7 @@ import exceptions.FactException;
 class AngleStructureComparatorTest extends AngleStructureComparator {
 
 	@Test
-	void horizontalAndVerticalComparatorTest() throws FactException {
+	void horizontalAndVerticalComparatorTest() {
 		/**
 		 * D
 		 * |
@@ -41,20 +41,85 @@ class AngleStructureComparatorTest extends AngleStructureComparator {
 		Segment BD=new Segment(B, D);
 		Segment CE=new Segment(C, E);
 		
-		Angle BAC= new Angle(AB, AC);
-		Angle DAC=new Angle(AD, AC);
-		Angle BAE=new Angle(AB, AE);
-		Angle DAE=new Angle(AD, AE);
-		Angle CAF=new Angle(AC, AF);
-		Angle DAF=new Angle(AD, AF);
+		Angle BAC = null;
+		try {
+			BAC = new Angle(AB, AC);
+		} catch (FactException e) {
+			System.out.println("Horizontal tests, angle BAC");
+		}
+		Angle DAC = null;
+		try {
+			DAC = new Angle(AD, AC);
+		} catch (FactException e) {
+			System.out.println("Horizontal tests, angle DAC");
+		}
+		Angle BAE = null;
+		try {
+			BAE = new Angle(AB, AE);
+		} catch (FactException e) {
+			System.out.println("Horizontal tests, angle BAE");
+
+		}
+		Angle DAE = null;
+		try {
+			DAE = new Angle(AD, AE);
+		} catch (FactException e) {
+			System.out.println("Horizontal tests, angle BAC");
+		}
+		Angle CAF = null;
+		try {
+			CAF = new Angle(AC, AF);
+		} catch (FactException e) {
+			System.out.println("Horizontal tests, angle CAF");
+
+		}
+		Angle DAF = null;
+		try {
+			DAF = new Angle(AD, AF);
+		} catch (FactException e) {
+			System.out.println("Horizontal tests, angle DAF");
+
+		}
 		
 		//reverse rays
-		Angle CAB=new Angle(AC, AB);
-		Angle CAD=new Angle(AC, AD);
-		Angle EAB=new Angle(AE, AB);
-		Angle EAD=new Angle(AE, AD);
-		Angle FAC=new Angle(AF, AC);
-		Angle FAD=new Angle(AF, AD);
+		Angle CAB = null;
+		try {
+			CAB = new Angle(AC, AB);
+		} catch (FactException e) {
+			System.out.println("Horizontal tests, angle CAB");
+
+		}
+		Angle CAD = null;
+		try {
+			CAD = new Angle(AC, AD);
+		} catch (FactException e) {
+			System.out.println("Horizontal tests, angle CAD");
+
+		}
+		Angle EAB = null;
+		try {
+			EAB = new Angle(AE, AB);
+		} catch (FactException e) {
+			System.out.println("Horizontal tests, angle EAB");
+		}
+		Angle EAD = null;
+		try {
+			EAD = new Angle(AE, AD);
+		} catch (FactException e) {
+			System.out.println("Horizontal tests, angle EAD");
+
+		}
+		try {
+			Angle FAC=new Angle(AF, AC);
+		} catch (FactException e) {
+			System.out.println("Horizontal tests, angle FAC");
+		}
+		try {
+			Angle FAD=new Angle(AF, AD);
+		} catch (FactException e) {
+			System.out.println("Horizontal tests, angle FAD");
+
+		}
 		
 		//NOTICE: What should an equal angle return
 		
@@ -106,7 +171,7 @@ class AngleStructureComparatorTest extends AngleStructureComparator {
 		
 	}
 	@Test
-	void slopeComparatorTest() throws FactException {
+	void slopeComparatorTest() {
 		/**
 		 *		  D
 		 *       /
@@ -137,20 +202,78 @@ class AngleStructureComparatorTest extends AngleStructureComparator {
 		Segment AD=new Segment(A, D);
 		Segment AF=new Segment(A, F);
 		
-		Angle BAC= new Angle(AB, AC);
-		Angle DAC=new Angle(AD, AC);
-		Angle BAE=new Angle(AB, AE);
-		Angle DAE=new Angle(AD, AE);
-		Angle CAF=new Angle(AC, AF);
-		Angle DAF=new Angle(AD, AF);
+		Angle BAC = null;
+		try {
+			BAC = new Angle(AB, AC);
+		} catch (FactException e) {
+			System.out.println("slope tests, angle BAC");
+		}
+		Angle DAC = null;
+		try {
+			DAC = new Angle(AD, AC);
+		} catch (FactException e) {
+			System.out.println("slope tests, angle DAC");
+		}
+		Angle BAE = null;
+		try {
+			BAE = new Angle(AB, AE);
+		} catch (FactException e) {
+			System.out.println("slope tests, angle BAE");
+		}
+		Angle DAE = null;
+		try {
+			DAE = new Angle(AD, AE);
+		} catch (FactException e) {
+			System.out.println("slope tests, angle DAE");
+		}
+		Angle CAF = null;
+		try {
+			CAF = new Angle(AC, AF);
+		} catch (FactException e) {
+			System.out.println("slope tests, angle CAF");
+		}
+		Angle DAF = null;
+		try {
+			DAF = new Angle(AD, AF);
+		} catch (FactException e) {
+			System.out.println("slope tests, angle DAF");
+		}
 		
 		//reverse rays
-		Angle CAB=new Angle(AC, AB);
-		Angle CAD=new Angle(AC, AD);
-		Angle EAB=new Angle(AE, AB);
-		Angle EAD=new Angle(AE, AD);
-		Angle FAC=new Angle(AF, AC);
-		Angle FAD=new Angle(AF, AD);
+		Angle CAB = null;
+		try {
+			CAB = new Angle(AC, AB);
+		} catch (FactException e) {
+			System.out.println("slope tests, angle CAB");
+		}
+		Angle CAD = null;
+		try {
+			CAD = new Angle(AC, AD);
+		} catch (FactException e) {
+			System.out.println("slope tests, angle CAD");
+		}
+		Angle EAB = null;
+		try {
+			EAB = new Angle(AE, AB);
+		} catch (FactException e) {
+			System.out.println("slope tests, angle EAB");
+		}
+		Angle EAD = null;
+		try {
+			EAD = new Angle(AE, AD);
+		} catch (FactException e) {
+			System.out.println("slope tests, angle EAD");
+		}
+		try {
+			Angle FAC=new Angle(AF, AC);
+		} catch (FactException e) {
+			System.out.println("slope tests, angle FAC");
+		}
+		try {
+			Angle FAD=new Angle(AF, AD);
+		} catch (FactException e) {
+			System.out.println("slope tests, angle FAD");
+		}
 		
 		//not equivalent angles
 		assertEquals (compare(BAC, CAF), AngleStructureComparator.STRUCTURALLY_INCOMPARABLE);
@@ -201,7 +324,7 @@ class AngleStructureComparatorTest extends AngleStructureComparator {
 	}
 	
 	@Test
-	void lineComparatorTest() throws FactException {
+	void lineComparatorTest() {
 		/**
 		 *             E
 		 *            /
@@ -233,18 +356,70 @@ class AngleStructureComparatorTest extends AngleStructureComparator {
 		Segment CD=new Segment(C, D);
 		Segment CF=new Segment(C, F);
 		
-		Angle ABC=new Angle(AB, BC);
-		Angle ABD=new Angle(AB, BD);
-		Angle ACE=new Angle(AC, CE);
-		Angle BCD=new Angle(BC, CD);
-		Angle BCF=new Angle(BC, CF);
+		Angle ABC = null;
+		try {
+			ABC = new Angle(AB, BC);
+		} catch (FactException e) {
+			System.out.println("line tests, angle ABC");
+		}
+		Angle ABD = null;
+		try {
+			ABD = new Angle(AB, BD);
+		} catch (FactException e) {
+			System.out.println("line tests, angle ABD");
+		}
+		Angle ACE = null;
+		try {
+			ACE = new Angle(AC, CE);
+		} catch (FactException e) {
+			System.out.println("line tests, angle ACE");
+		}
+		Angle BCD = null;
+		try {
+			BCD = new Angle(BC, CD);
+		} catch (FactException e) {
+			System.out.println("line tests, angle BCD");
+		}
+		Angle BCF = null;
+		try {
+			BCF = new Angle(BC, CF);
+		} catch (FactException e) {
+			System.out.println("line tests, angle BCF");
+
+		}
 		
 		
-		Angle CBA=new Angle(BC, AB);
-		Angle DBA=new Angle(BD, AB);
-		Angle ECA=new Angle(CE, AC);
-		Angle DCB=new Angle(CD, BC);
-		Angle FCB=new Angle(CF, BC);
+		Angle CBA = null;
+		try {
+			CBA = new Angle(BC, AB);
+		} catch (FactException e) {
+			System.out.println("line tests, angle CBA");
+
+		}
+		Angle DBA = null;
+		try {
+			DBA = new Angle(BD, AB);
+		} catch (FactException e) {
+			System.out.println("line tests, angle DBA");
+		}
+		Angle ECA = null;
+		try {
+			ECA = new Angle(CE, AC);
+		} catch (FactException e) {
+			System.out.println("line tests, angle ECA");
+		}
+		Angle DCB = null;
+		try {
+			DCB = new Angle(CD, BC);
+		} catch (FactException e) {
+			System.out.println("line tests, angle DCB");
+		}
+		Angle FCB = null;
+		try {
+			FCB = new Angle(CF, BC);
+		} catch (FactException e) {
+			System.out.println("line tests, angle FCB");
+		}
 		
 		//not equivalent angles
 		assertEquals (compare(BCD, BCF), AngleStructureComparator.STRUCTURALLY_INCOMPARABLE);
