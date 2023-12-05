@@ -548,18 +548,14 @@ class AngleLinkedEquivalenceClassTest {
 	
 		AngleLinkedEquivalenceClass cl = new AngleLinkedEquivalenceClass(new AngleStructureComparator());
 		
-		
-		System.out.println(cl.isEmpty());
-		
+			
 		//cl.demoteAndSetCanonical(baf);
 //		
 //		cl.demoteAndSetCanonical(baf);
 //		cl.demoteAndSetCanonical(bae);
 		
 		cl.add(baf);
-
 		cl.demoteAndSetCanonical(bae);
-		
 //		
 		//System.out.println(cl.canonical());
 //		
@@ -568,7 +564,6 @@ class AngleLinkedEquivalenceClassTest {
 		//assertEquals(cae,cl.canonical());
 
 		
-		System.out.println(cl.toString());
 		
 //		
 //		cl.add(dae);

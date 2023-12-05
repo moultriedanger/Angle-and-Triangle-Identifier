@@ -84,29 +84,11 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 		//Add if the list is empty
 		if (!belongs(a)) return false;
 		
-		else if (this.isEmpty()) {
-			this.add(a);
-			return true;
-		}
-		
-		System.out.println(_comparator.compare(a, _canonical));
-		
-		if (_comparator.compare(a, _canonical) != AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) return false;
-	
-		else if (_comparator.compare(a, _canonical) == -1){
-			
-			Angle fallenKing = _canonical;
-			
-			_canonical = a;
-			
-			//adds old canonical to front of linked list
-			_rest.addToFront(fallenKing);
-			return true;
-		}
-		
-	//Add structurally comparable element to rest of list
-	_rest.addToFront(a);
-	return true;
+		if (this.isEmpty()) return add(a);
+				
+		if (_comparator.compare(a, _canonical) == AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) return false;
+
+		return add(a);
 	}
 	
 	public boolean remove(Angle target) {
