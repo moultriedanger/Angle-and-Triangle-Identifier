@@ -165,10 +165,11 @@ public class Angle implements Comparable<Angle>
 	@Override
 	public String toString()
 	{
-		return "Angle( m" + _ray1Endpoint.getName() +
-				            _vertex.getName() +
-				            _ray2Endpoint.getName() +
-				            " = " + String.format("%1$.3f", _measure) + ")";
+
+		return "Angle( m" +  _ray1Endpoint.getName() +
+	            _vertex.getName() +
+	            _ray2Endpoint.getName() +
+	            " = " + String.format("%1$.3f", _measure) + ")";
 	}
 
 	@Override
@@ -178,5 +179,6 @@ public class Angle implements Comparable<Angle>
 		
 		return (this._ray1Endpoint.equals(that._ray1Endpoint) && this._ray2Endpoint.equals(that._ray2Endpoint) && this.overlays(that)) ||
 				this._ray1Endpoint.equals(that._ray2Endpoint) && this._ray2Endpoint.equals(that._ray1Endpoint) && this.overlays(that);
+
 	}
 }

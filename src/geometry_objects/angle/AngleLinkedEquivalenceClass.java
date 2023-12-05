@@ -33,6 +33,11 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 		super(comparator);
 	}
 	
+	public Angle canonical() {
+		return super.canonical();
+	}
+
+	
 	@Override
 	public boolean add(Angle a) {
 		if (a == null) return false;
@@ -60,7 +65,6 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 		
 		//If the angle is indeterminate or greater than the canonical
 		else if (_comparator.compare(a, _canonical) == 0 || _comparator.compare(a, _canonical) == 1) {
-		
 			_rest.addToFront(a);
 			return true;
 		}
@@ -70,6 +74,7 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	@Override
 	public boolean belongs(Angle a) {
 		if (a == null) return false;
+		else if (this.isEmpty()) return true;
 		
 		return _comparator.compare(_canonical, a) != AngleStructureComparator.STRUCTURALLY_INCOMPARABLE;
 	}
@@ -83,14 +88,15 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 			this.add(a);
 			return true;
 		}
-
-		if (_comparator.compare(_canonical, a) != AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) return false;
+		
+		System.out.println(_comparator.compare(a, _canonical));
+		
+		if (_comparator.compare(a, _canonical) != AngleStructureComparator.STRUCTURALLY_INCOMPARABLE) return false;
 	
-		else if (_comparator.compare(a,_canonical)== -1){
+		else if (_comparator.compare(a, _canonical) == -1){
 			
 			Angle fallenKing = _canonical;
 			
-			//sets canonical to given angle
 			_canonical = a;
 			
 			//adds old canonical to front of linked list
@@ -98,20 +104,19 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 			return true;
 		}
 		
-		//Add structurally comparable element to rest of list
-		_rest.addToFront(a);
-		return true;
+	//Add structurally comparable element to rest of list
+	_rest.addToFront(a);
+	return true;
 	}
 	
-	//HEADS UP: Will likely have to do remove as well
+	public boolean remove(Angle target) {
+		return super.remove(target);
+	}
 	
-//	public boolean remove(Angle element) {
-//		if(element == null || element.equals(_canonical)) {
-//			return false;
-//		}
-//		return _rest.remove(element);
-//	}
-	
+	public boolean removeCanonical(Angle target) {
+		return super.removeCanonical(target);
+	}
+		
 	@Override
 	public boolean contains(Angle target) {
 		//Make sure target belongs

@@ -47,8 +47,6 @@ class AngleStructureComparatorTest extends AngleStructureComparator {
 		Angle DAE=new Angle(AD, AE);
 		Angle CAF=new Angle(AC, AF);
 		Angle DAF=new Angle(AD, AF);
-
-		
 		
 		//reverse rays
 		Angle CAB=new Angle(AC, AB);

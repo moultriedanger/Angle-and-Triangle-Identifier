@@ -335,8 +335,10 @@ class AngleIdentifierTest
 		}
 		catch (FactException te) { System.err.println("Invalid Angles in Angle test."); }
 
+
 		assertEquals(expectedAngles.size(), computedAngles.size());
-		
+
+		System.out.println(computedAngles.toString());		
 		//
 		// Equality
 		//

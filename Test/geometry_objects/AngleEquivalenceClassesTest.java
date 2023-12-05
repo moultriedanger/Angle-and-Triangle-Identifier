@@ -17,6 +17,25 @@ class AngleEquivalenceClassesTest {
 	@Test
 	void testAdd() {
 		
+		/**
+		 * Given the figure below:
+		 * 
+		 *    A-------B----C-----------D
+		 *    |\
+		 *    | \
+		 *    |  \
+		 *    |   E
+		 *    |    \
+		 *    |     \
+		 *    G      F
+		 * 
+		 * Equivalence classes structure we want:
+		 * 
+		 *   canonical = BAE
+		 *   rest = BAF, CAE, DAE, CAF, DAF
+		 *   
+		 */
+		
 		AngleEquivalenceClasses classList = new AngleEquivalenceClasses(new AngleStructureComparator());
 		
 		//Simple test
@@ -28,16 +47,12 @@ class AngleEquivalenceClassesTest {
 		Point f = new Point("F", 2, 4);
 		Point g = new Point("G", 0, 4);
 		
-		//BAE
 		Segment ae = new Segment(a,e);
 		Segment ab = new Segment(a,b);
 		Segment af = new Segment(a,f);
 		Segment ac = new Segment(a,c);
 		Segment ad = new Segment(a,d);
 		Segment ag = new Segment(a,g);
-		
-		
-		
 		
 		//Make all the angles
 		Angle bae = null;
@@ -107,9 +122,9 @@ class AngleEquivalenceClassesTest {
 		}
 				
 		
-		
 		//This should be the new canonical
 		classList.add(bae);
+
 		classList.add(daf);
 		classList.add(baf);
 		
@@ -121,7 +136,6 @@ class AngleEquivalenceClassesTest {
 		assertEquals(2, classList.numClasses());
 		assertEquals(5,classList.size());
 		
-//		System.out.println(classList.toString());
 		
 //		cl.add(dae);
 //		cl.add(caf);
@@ -134,7 +148,6 @@ class AngleEquivalenceClassesTest {
 //		assertEquals (6, cl.size());
 	}
 	
-	
 //	@Test
 //	void testSize() {
 //		
@@ -142,11 +155,6 @@ class AngleEquivalenceClassesTest {
 
 //	@Test
 //	void testNumClasses() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	void testToString() {
 //		fail("Not yet implemented");
 //	}
 //
@@ -159,7 +167,7 @@ class AngleEquivalenceClassesTest {
 //	void testAddAngle() {
 //		fail("Not yet implemented");
 //	}
-//
+	
 	@Test
 	void testContainsAngle() {
 		/**
@@ -198,30 +206,35 @@ class AngleEquivalenceClassesTest {
 		} catch (FactException e) {
 			System.out.println("BAC error");
 		}
+		
 		Angle DAC = null;
 		try {
 			DAC = new Angle(AD, AC);
 		} catch (FactException e) {
 			System.out.println("DAC error");
 		}
+		
 		Angle BAE = null;
 		try {
 			BAE = new Angle(AB, AE);
 		} catch (FactException e) {
 			System.out.println("BAE error");
 		}
+		
 		Angle DAE = null;
 		try {
 			DAE = new Angle(AD, AE);
 		} catch (FactException e) {
 			System.out.println("DAE error");
 		}
+		
 		Angle CAF = null;
 		try {
 			CAF = new Angle(AC, AF);
 		} catch (FactException e) {
 			System.out.println("CAF error");
 		}
+		
 		Angle DAF = null;
 		try {
 			DAF = new Angle(AD, AF);
@@ -246,9 +259,6 @@ class AngleEquivalenceClassesTest {
 		assertTrue(equivClass.contains(DAE));
 		assertTrue(equivClass.contains(CAF));
 		assertTrue(equivClass.contains(DAF));
-		
-		
-		
 		
 		//reverse rays
 		Angle CAB=null;
@@ -287,8 +297,9 @@ class AngleEquivalenceClassesTest {
 		} catch (FactException e) {
 			System.out.println("FAD error");
 		}
+
 		assertTrue(equivClass.contains(CAB));
-		
+	
 	}
 
 }
